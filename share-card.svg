@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="314" viewBox="0 0 600 314">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdf8ed"/>
+      <stop offset="50%" style="stop-color:#fcf3e0"/>
+      <stop offset="100%" style="stop-color:#f8ecd0"/>
+    </linearGradient>
+    <linearGradient id="title" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e67e22"/>
+      <stop offset="50%" style="stop-color:#e74c3c"/>
+      <stop offset="100%" style="stop-color:#8e44ad"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="314" fill="url(#bg)" rx="12"/>
+  <circle cx="520" cy="30" r="120" fill="rgba(230,126,34,0.06)"/>
+  <circle cx="80" cy="284" r="100" fill="rgba(231,76,60,0.04)"/>
+  <text x="300" y="60" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="18" fill="#a0806a" text-anchor="middle">🧓 含登量测评</text>
+  <text x="300" y="100" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="28" font-weight="bold" fill="#3d2b1f" text-anchor="middle">测测你的老登指数</text>
+  <text x="300" y="140" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="15" fill="#6b5342" text-anchor="middle">22种老登画像 · 6级登味等级</text>
+  <text x="300" y="170" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#a0806a" text-anchor="middle">国企登 体制登 外企登 小登 高管登 学术登</text>
+  <text x="300" y="192" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="14" fill="#a0806a" text-anchor="middle">社会大姐登 微商登 互联网白兔登 金融登……</text>
+  <rect x="220" y="215" width="160" height="36" rx="18" fill="#e67e22" opacity="0.9"/>
+  <text x="300" y="240" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">开始测评 →</text>
+  <text x="300" y="290" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#c8b8a8" text-anchor="middle">仅供娱乐 · 博君一笑</text>
+</svg>

@@ -1,0 +1,2121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>含登量测评 | 测测你的老登指数</title>
+<meta name="description" content="含登量测评，22种老登画像+6级登味等级，测测你的老登指数！风趣幽默的社交测评。">
+<meta property="og:title" content="含登量测评 | 测测你的老登指数">
+<meta property="og:description" content="22种老登画像+6级登味等级，测测你的含登量！到底是国企登、外企登、还是互联网白兔登？答完便知。">
+<meta property="og:image" content="https://joezhou2014.github.io/deng-test/share-card.png">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="314">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://joezhou2014.github.io/deng-test/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="含登量测评 | 测测你的老登指数">
+<meta name="twitter:description" content="22种老登画像，测测你的含登量！">
+<meta name="twitter:image" content="https://joezhou2014.github.io/deng-test/share-card.png">
+<link rel="canonical" href="https://joezhou2014.github.io/deng-test/">
+<style>
+  :root {
+    --bg: #fdf8ed;
+    --panel: rgba(255,255,255,0.95);
+    --text: #3d2b1f;
+    --muted: #a0806a;
+    --soft: #f5ebe0;
+    --line: #e8ddd0;
+    --accent: #e67e22;
+    --accent-strong: #d35400;
+    --shadow: 0 4px 20px rgba(61,43,31,0.08);
+    --radius: 22px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== 卡通装饰背景 ===== */
+  .bg-pattern {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .bg-pattern span {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.1;
+    animation: float 25s infinite linear;
+  }
+  @keyframes float {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.1; }
+    90% { opacity: 0.1; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ===== SBTI 风格装饰圆 ===== */
+  .deco-circle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .deco-circle.tl {
+    right: -60px;
+    top: -60px;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(180deg, rgba(230,126,34,0.12), rgba(230,126,34,0.02));
+  }
+  .deco-circle.br {
+    left: -40px;
+    bottom: -40px;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(180deg, rgba(231,76,60,0.08), rgba(231,76,60,0.01));
+  }
+
+  /* ===== 页面容器 ===== */
+  .container {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 20px 16px 40px;
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+  }
+
+  /* ===== 头部 ===== */
+  .header {
+    text-align: center;
+    padding: 32px 0 16px;
+  }
+  .logo-icon {
+    font-size: 56px;
+    display: block;
+    margin-bottom: 8px;
+    animation: bounce 2s infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 900;
+    background: linear-gradient(135deg, #e67e22, #e74c3c, #8e44ad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 6px;
+    letter-spacing: 2px;
+  }
+
+  /* ===== 卡片通用 ===== */
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ===== 眉毛标签（SBTI风格） ===== */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--accent-strong);
+    background: var(--soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 12px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== 首页 ===== */
+  #page-home { text-align: center; padding-top: 20px; }
+  .hero-emoji {
+    font-size: 80px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero-desc {
+    font-size: 15px;
+    color: #6b5342;
+    line-height: 1.8;
+    margin: 16px 0 24px;
+  }
+  .hero-desc strong { color: #e67e22; }
+  .btn-start {
+    display: inline-block;
+    background: linear-gradient(135deg, #e67e22, #e74c3c);
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 16px 60px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
+    margin: 8px 0;
+  }
+  .btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(230, 126, 34, 0.45); }
+  .btn-start:active { transform: translateY(0); }
+
+  /* ===== 答题页 ===== */
+  .progress-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .progress-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: #f0e6d8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f39c12, #e74c3c);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+  }
+  .progress-text {
+    font-size: 13px;
+    color: #a0806a;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+  .question-number {
+    display: inline-block;
+    background: #f5ebe0;
+    padding: 4px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    color: #a0806a;
+    margin-bottom: 12px;
+  }
+  .question-text {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: #3d2b1f;
+  }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .option-btn {
+    background: #f8f2ea;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    color: #3d2b1f;
+    transition: all 0.2s;
+    line-height: 1.5;
+  }
+  .option-btn:hover:not(:disabled) {
+    background: #f0e0d0;
+    border-color: #e67e22;
+    transform: translateX(4px);
+  }
+  .option-btn:active:not(:disabled) { transform: translateX(2px); }
+  .option-btn.selected {
+    background: #fcf3e9;
+    border-color: #e67e22;
+    box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+  }
+  .option-btn:disabled { cursor: default; opacity: 0.6; }
+  .option-btn .option-label {
+    display: inline-block;
+    background: #e0d0c0;
+    color: #6b5342;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  .option-btn.selected .option-label {
+    background: #e67e22;
+    color: #fff;
+  }
+
+  /* ===== 结果页 ===== */
+  #page-result { display: none; }
+  .result-badge {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  /* ===== Avatar炫光帧 ===== */
+  .avatar-frame {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 16px;
+    position: relative;
+  }
+  .avatar-frame .bg-circle {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fde3c8, #f8d5b0, #f0c090);
+    box-shadow: 0 8px 30px rgba(230,126,34,0.25), inset 0 -4px 12px rgba(0,0,0,0.05);
+    border: 3px solid rgba(255,255,255,0.8);
+  }
+  .avatar-frame .bg-circle::after {
+    content: '';
+    position: absolute;
+    top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(230,126,34,0.15), rgba(231,76,60,0.1));
+    z-index: -1;
+    animation: pulse-ring 2s ease-in-out infinite;
+  }
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.08); opacity: 0.15; }
+  }
+  .avatar-frame .avatar-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    z-index: 1;
+    animation: avatar-float 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+  }
+  .avatar-frame .big-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 52px;
+    z-index: 1;
+    animation: avatar-float 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+  }
+  @keyframes avatar-float {
+    0%, 100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    25% { transform: translate(-50%, -50%) scale(1.05) rotate(-2deg); }
+    75% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); }
+  }
+  .result-badge h2 {
+    font-size: 26px;
+    font-weight: 900;
+    color: #3d2b1f;
+    margin-bottom: 4px;
+  }
+  .type-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #e67e22, #e74c3c);
+    color: #fff;
+    padding: 6px 20px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    margin: 4px 0;
+    box-shadow: 0 4px 12px rgba(230,126,34,0.2);
+  }
+  .level-badge-wrap {
+    margin: 12px 0;
+  }
+  .level-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #3d2b1f, #5a3d2a);
+    color: #fdf8ed;
+    padding: 8px 28px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  }
+  .match-badge {
+    display: inline-block;
+    background: var(--soft);
+    color: var(--accent-strong);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+  }
+
+  .result-section {
+    margin-bottom: 20px;
+  }
+  .result-section h3 {
+    font-size: 16px;
+    color: #e67e22;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .result-section .content {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #6b5342;
+  }
+  .result-section .content .tag {
+    display: inline-block;
+    background: #f5ebe0;
+    padding: 3px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #a0806a;
+    margin: 2px 3px;
+  }
+
+  .score-meter {
+    background: #f8f2ea;
+    border-radius: 16px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .score-meter .label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #a0806a;
+    margin-bottom: 6px;
+  }
+  .score-meter .bar-bg {
+    height: 12px;
+    background: #f0e6d8;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .score-meter .bar-fill {
+    height: 100%;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #2ecc71, #f1c40f, #e67e22, #e74c3c, #9b59b6);
+    transition: width 1s ease;
+  }
+
+  .btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 14px 20px;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #e67e22, #e74c3c);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(230,126,34,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: #f5ebe0;
+    color: #7a5f4a;
+  }
+  .btn-secondary:hover { background: #efe0d0; }
+
+  /* ===== 广告位 ===== */
+  .ad-slot {
+    background: #f5f0e8;
+    border: 2px dashed #d4c8b8;
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    color: #b8a898;
+    font-size: 13px;
+    margin: 16px 0;
+    position: relative;
+  }
+  .ad-slot .ad-label {
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    background: #f5f0e8;
+    padding: 0 8px;
+    font-size: 11px;
+    color: #c8b8a8;
+  }
+  .ad-slot .ad-content {
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ===== 打赏区 ===== */
+  .donation-section {
+    background: #f8f2ea;
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    margin: 16px 0;
+  }
+  .donation-section h3 {
+    font-size: 14px;
+    color: #7a5f4a;
+    margin-bottom: 12px;
+  }
+  .qr-placeholder {
+    width: 140px;
+    height: 140px;
+    background: #fff;
+    border: 2px dashed #d4c8b8;
+    border-radius: 12px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #c8b8a8;
+  }
+
+  /* ===== 页脚 ===== */
+  .footer {
+    text-align: center;
+    padding: 16px 0;
+    font-size: 12px;
+    color: #c8b8a8;
+  }
+
+  /* ===== 闪亮星星装饰 ===== */
+  .sparkle-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .sparkle {
+    position: absolute;
+    color: #f1c40f;
+    font-size: 14px;
+    animation: sparkle-fade 2s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes sparkle-fade {
+    0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+    50% { opacity: 0.6; transform: scale(1) rotate(180deg); }
+  }
+
+  /* ===== 过度动画 ===== */
+  .fade-in {
+    animation: fadeIn 0.5s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 结果页quote装饰 ===== */
+  .quote-box {
+    background: linear-gradient(135deg, #fff8f0, #fff5e6);
+    border-left: 4px solid #e67e22;
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-style: italic;
+    color: #7a5f4a;
+    position: relative;
+  }
+  .quote-box::before {
+    content: '"';
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    font-size: 40px;
+    color: rgba(230,126,34,0.15);
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+
+  /* ===== 结果页tag装饰 ===== */
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .tag-cloud .tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #f5ebe0, #f0e0d0);
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #7a5f4a;
+    border: 1px solid rgba(0,0,0,0.03);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+
+  .chart-section { overflow: visible; }
+  .polar-wrap { text-align: center; padding: 8px 0; }
+  .polar-wrap canvas { display: block; margin: 0 auto; max-width: 260px; }
+  .polar-legend {
+    display: flex; flex-wrap: wrap; gap: 6px 14px;
+    justify-content: center; margin-top: 8px;
+    font-size: 12px; color: #7a5f4a;
+  }
+  .polar-legend .legend-dot {
+    display: inline-block; width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 4px; vertical-align: middle;
+  }
+
+  .similar-chip {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--accent-strong);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .similar-chip:hover {
+    background: var(--soft);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* ===== Toast ===== */
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(61, 43, 31, 0.92);
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 14px;
+    font-size: 15px;
+    z-index: 999;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 400px) {
+    .container { padding: 12px 12px 30px; }
+    .card { padding: 20px 16px; }
+    .header h1 { font-size: 24px; }
+    .question-text { font-size: 17px; }
+  }
+
+  /* 分享图生成区 - 隐藏 */
+  #share-image { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ===== 背景装饰 ===== -->
+<div class="bg-pattern" id="bgPattern"></div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<div class="container">
+
+  <!-- ===== 头部 ===== -->
+  <div class="header">
+    <span class="logo-icon">🧓</span>
+    <h1>含登量测评</h1>
+    <div class="subtitle">测测你的老登指数</div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ===== 首页 ===== -->
+  <!-- ============================================================ -->
+  <div id="page-home" class="fade-in">
+    <div class="card">
+      <div class="deco-circle tl"></div>
+      <div class="deco-circle br"></div>
+      <div style="position:relative; z-index:1; text-align:center;">
+      <div class="hero-emoji">🤔🧓💨</div>
+      <div class="eyebrow" style="margin:0 auto 16px;">🔥 互联网老登鉴定系统</div>
+      <p class="hero-desc">
+        <strong>「含登量测评」</strong>是一套科学（并不）的老登鉴定体系。<br>
+        通过 16 道灵魂拷问，精准锁定你的<strong>老登画像</strong>，
+        并解锁你的<strong>登味等级</strong>。
+      </p>
+      <div style="background:var(--soft); border-radius:16px; padding:12px; margin:16px 0;">
+        <p style="font-size:13px; color:#7a5f4a; line-height:1.6;">
+          🔮 你的体内潜藏着某种「登」的基因<br>
+          答题完毕，方可揭晓你的真面目
+        </p>
+      </div>
+      <button class="btn-start" onclick="startQuiz()">开始测评</button>
+      </div>
+    </div>
+
+    <!-- 首页广告位 -->
+    <div class="ad-slot">
+      <span class="ad-label">广告</span>
+      <div class="ad-content">
+        <span>📢 广告位招租 · 联系管理员</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      仅供娱乐 · 博君一笑
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ===== 答题页 ===== -->
+  <!-- ============================================================ -->
+  <div id="page-quiz" style="display:none;" class="fade-in">
+    <div class="card">
+      <div class="progress-section">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-text" id="progressText">1/12</span>
+      </div>
+      <div class="question-number" id="qNumber">第 1 题</div>
+      <div class="question-text" id="qText">题目加载中...</div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- ===== 结果页 ===== -->
+  <!-- ============================================================ -->
+  <div id="page-result">
+    <div class="card fade-in">
+      <div class="deco-circle tl"></div>
+      <div class="deco-circle br"></div>
+      <div style="position:relative; z-index:1;">
+      <div class="sparkle-container" id="sparkleContainer"></div>
+      <div class="result-badge">
+        <div class="avatar-frame" id="avatarFrame">
+          <div class="bg-circle"></div>
+          <img id="resultAvatarImg" class="avatar-img" src="" alt="avatar" style="display:none;" />
+          <span class="big-emoji" id="resultEmoji" style="display:none;">🧓</span>
+        </div>
+        <h2 id="resultTitle">国企登</h2>
+        <div><span class="type-badge" id="resultTypeBadge">🏢 国企登</span></div>
+        <div class="match-badge" id="matchBadge" style="margin:6px auto 0;">匹配度 100%</div>
+        <div class="level-badge-wrap">
+          <span class="level-badge" id="resultLevel">登味等级：老登</span>
+        </div>
+      </div>
+
+      <div class="score-meter">
+        <div class="label-row">
+          <span>含登量</span>
+          <span id="scoreValue">0 分</span>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" id="scoreBar" style="width:0%;"></div>
+        </div>
+      </div>
+
+      <div class="result-section">
+        <h3>📋 老登画像</h3>
+        <div class="content" id="resultDesc">描述加载中...</div>
+      </div>
+
+      <div class="result-section">
+        <h3>🔍 登味分析</h3>
+        <div class="content" id="resultAnalysis">分析加载中...</div>
+      </div>
+
+      <div class="result-section">
+        <h3>💬 经典语录</h3>
+        <div class="content" id="resultQuote">"语录加载中..."</div>
+      </div>
+
+      <div class="result-section" id="similarSection">
+        <h3>👥 你可能也是这些类型</h3>
+        <div class="content" id="similarTypes"></div>
+      </div>
+
+      <div class="result-section chart-section">
+        <h3>📊 登味五维图</h3>
+        <div class="polar-wrap">
+          <canvas id="polarChart" width="300" height="300" style="max-width:100%; height:auto; display:block; margin:0 auto;"></canvas>
+          <div class="polar-legend">
+            <span><span class="legend-dot" style="background:#e74c3c;"></span>官僚气</span>
+            <span><span class="legend-dot" style="background:#f39c12;"></span>油腻感</span>
+            <span><span class="legend-dot" style="background:#2ecc71;"></span>摆烂度</span>
+            <span><span class="legend-dot" style="background:#3498db;"></span>虚荣心</span>
+            <span><span class="legend-dot" style="background:#9b59b6;"></span>压迫力</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-section" id="faqSection">
+        <h3>❓ 关于<a id="faqTypeName">这个类型</a></h3>
+        <div class="content" id="resultFaq"></div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="btn-group">
+        <button class="btn-primary" onclick="shareResult()">📤 分享给朋友</button>
+        <button class="btn-secondary" onclick="savePoster()">🖼️ 保存海报</button>
+        <button class="btn-secondary" onclick="copyChallengeLink()">🔗 复制挑战链接</button>
+        <button class="btn-secondary" onclick="restartQuiz()">🔄 再测一次</button>
+      </div>
+
+      <!-- 各类型得分 -->
+      <details style="margin: 12px 0;">
+        <summary style="font-size:13px; color:var(--muted); cursor:pointer;">📊 查看详细得分</summary>
+        <div id="scoreBreakdown" style="padding: 12px 0 0; font-size:13px; color:#6b5342;"></div>
+      </details>
+      </div><!-- /z-index wrapper -->
+    </div>
+
+    <!-- 结果页广告位 -->
+    <div class="ad-slot">
+      <span class="ad-label">广告</span>
+      <div class="ad-content">
+        <span>📢 广告位招租 · 联系管理员</span>
+      </div>
+    </div>
+
+    <!-- 打赏区 -->
+    <div class="donation-section">
+      <h3>☕ 如果觉得有趣，请作者喝杯咖啡</h3>
+      <div class="qr-placeholder">
+        <span>📱<br>打赏码<br>（预留）</span>
+      </div>
+      <p style="font-size:12px; color:#b8a898;">微信/支付宝扫一扫</p>
+    </div>
+
+    <div class="footer">
+      仅供娱乐 · 博君一笑 · 如有雷同纯属巧合
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+
+// ================================================================
+// 数据：题目
+// ================================================================
+const questions = [
+  {
+    text: '周末早上，你最可能做的事情是？',
+    options: [
+      { label: 'A', text: '去办公室加班，让领导看到你的敬业精神', scores: { guoqi: 3, gaoguan: 2, xiaodeng: 1 } },
+      { label: 'B', text: '参加线上培训班，学习最新文件精神', scores: { tizhi: 3, guoqi: 1 } },
+      { label: 'C', text: '去健身房打卡，然后和朋友brunch发朋友圈', scores: { waiqi: 3 } },
+      { label: 'D', text: '睡到自然醒，打游戏打到手软，啥也没干', scores: { xiaodeng: 2, hulianwang: 1 } },
+      { label: 'E', text: '在实验室/书房写论文/做研究', scores: { xueshu: 3 } },
+      { label: 'F', text: '早起看盘，研究K线图和财经资讯', scores: { jinrong: 3 } },
+      { label: 'G', text: '去五星级酒店下午茶，精修九张自拍发朋友圈', scores: { mingyuan: 3 } },
+    ]
+  },
+  {
+    text: '你在微信群里的发言风格更像哪种？',
+    options: [
+      { label: 'A', text: '转发官方通知和正能量文章，并附一句"值得学习"', scores: { guoqi: 3, tizhi: 2 } },
+      { label: 'B', text: '中英文夹杂，分享行业报告链接', scores: { waiqi: 2, mingyuan: 1 } },
+      { label: 'C', text: '长期潜水，偶尔冒泡说句"收到"', scores: { xiaodeng: 2, xueshu: 1 } },
+      { label: 'D', text: '每天发产品广告、成交截图、喜提喜报', scores: { weishang: 3 } },
+      { label: 'E', text: '群里看到不爽的直接开怼，不留情面', scores: { shehui: 3 } },
+      { label: 'F', text: '热衷玩梗发表情包，人均互联网段子手', scores: { hulianwang: 3 } },
+      { label: 'G', text: '聊财经聊行情，分享投资心得和收益截图', scores: { jinrong: 3 } },
+    ]
+  },
+  {
+    text: '领导画了一个大饼，你的第一反应是？',
+    options: [
+      { label: 'A', text: '带头鼓掌，表示坚决拥护领导英明决策', scores: { guoqi: 3, gaoguan: 1 } },
+      { label: 'B', text: '认真做笔记，思考如何把精神落到实处', scores: { tizhi: 3, xiaodeng: 1 } },
+      { label: 'C', text: '礼貌微笑，心里盘算对自己KPI有没有帮助', scores: { waiqi: 2, hulianwang: 1 } },
+      { label: 'D', text: '当场提出三个质疑和一个替代方案', scores: { xueshu: 3 } },
+      { label: 'E', text: '直接说"这饼我熟，我来画吧"', scores: { gaoguan: 3, weishang: 1 } },
+    ]
+  },
+  {
+    text: '你的朋友圈封面和主要内容是？',
+    options: [
+      { label: 'A', text: '公司logo或党建背景图，转发行业动态', scores: { guoqi: 2, tizhi: 2, jinrong: 1 } },
+      { label: 'B', text: '旅行风景照或艺术展，偶尔发发自拍', scores: { waiqi: 2, xiaodeng: 2 } },
+      { label: 'C', text: '学术会议合影+论文上线截图', scores: { xueshu: 3 } },
+      { label: 'D', text: '产品海报+客户反馈+喜提截图刷屏', scores: { weishang: 3 } },
+      { label: 'E', text: '三天可见，啥也没有', scores: { xiaodeng: 2, shehui: 1 } },
+      { label: 'F', text: '和企业大佬的合影+行业峰会照片', scores: { gaoguan: 3 } },
+      { label: 'G', text: '精修九宫格+五星级酒店定位，假装在马尔代夫', scores: { mingyuan: 3 } },
+      { label: 'H', text: '转发搞笑视频和互联网热梗合集', scores: { hulianwang: 3 } },
+    ]
+  },
+  {
+    text: '同事/朋友请你帮忙，你通常会？',
+    options: [
+      { label: 'A', text: '先问"走流程了吗？按制度来"', scores: { tizhi: 3, guoqi: 1 } },
+      { label: 'B', text: '"这个不在我的scope里面，建议找XX团队sync一下"', scores: { waiqi: 3 } },
+      { label: 'C', text: '"这事儿包我身上了！"拍胸脯保证', scores: { shehui: 3 } },
+      { label: 'D', text: '先评估一下对自己有什么好处', scores: { gaoguan: 3, weishang: 1 } },
+      { label: 'E', text: '嘴上答应但一直拖着，最后忘了', scores: { xiaodeng: 1, hulianwang: 1 } },
+    ]
+  },
+  {
+    text: '你最常用的口头禅是？',
+    options: [
+      { label: 'A', text: '"我个人补充三点意见" / "年轻人要沉得住气"', scores: { guoqi: 3 } },
+      { label: 'B', text: '"提高站位" / "压实责任" / "建立健全机制"', scores: { tizhi: 3 } },
+      { label: 'C', text: '"这个我们align一下" / "我有点concern" / "let\u2019s sync"', scores: { waiqi: 3 } },
+      { label: 'D', text: '"格局打开" / "赋能" / "闭环" / "颗粒度"', scores: { gaoguan: 3 } },
+      { label: 'E', text: '"从学术角度来看" / "我们在xx期刊上发表过"', scores: { xueshu: 3 } },
+      { label: 'F', text: '"多大点事儿" / "包我身上" / "你给我等着"', scores: { shehui: 3 } },
+      { label: 'G', text: '"绝绝子" / "笑死" / "我直接好家伙" / "栓Q"', scores: { hulianwang: 3 } },
+      { label: 'H', text: '"这个票有想象空间" / "流动性宽松" / "结构性机会"', scores: { jinrong: 3 } },
+    ]
+  },
+  {
+    text: '你如何看待酒桌文化？',
+    options: [
+      { label: 'A', text: '酒桌就是第二办公室，该敬的必须敬到位', scores: { guoqi: 3, gaoguan: 1 } },
+      { label: 'B', text: '能喝但不过量，保持清醒最重要', scores: { tizhi: 2, waiqi: 1 } },
+      { label: 'C', text: '酒桌上才能谈成事，不喝就是不给我面子', scores: { shehui: 3 } },
+      { label: 'D', text: '酒精伤身，拒绝一切酒局', scores: { xueshu: 2, xiaodeng: 1, hulianwang: 1 } },
+      { label: 'E', text: '酒量就是流量，喝得越多单子越大', scores: { weishang: 3 } },
+      { label: 'F', text: '只喝红酒，先醒半小时，拍照发朋友圈配文"微醺"', scores: { mingyuan: 3 } },
+      { label: 'G', text: '酒桌上边喝边聊行情，顺便推荐两只股票', scores: { jinrong: 3 } },
+    ]
+  },
+  {
+    text: '你的穿着风格更接近？',
+    options: [
+      { label: 'A', text: 'Polo衫扎进西裤里 + 皮腰带', scores: { guoqi: 3 } },
+      { label: 'B', text: '白衬衫 + 黑裤子 + 公文包', scores: { tizhi: 3 } },
+      { label: 'C', text: 'Smart Casual + 轻奢手表', scores: { gaoguan: 2, jinrong: 1 } },
+      { label: 'D', text: '卫衣 + 双肩包 + 运动鞋', scores: { xiaodeng: 2, hulianwang: 1 } },
+      { label: 'E', text: '格子衫 + 牛仔裤 + 发际线后移', scores: { xueshu: 3 } },
+      { label: 'F', text: '紧身裙 + 大金链子 + 墨镜', scores: { shehui: 2, weishang: 1 } },
+      { label: 'G', text: '全身奢侈品logo，从头到脚都是名牌', scores: { mingyuan: 3 } },
+    ]
+  },
+  {
+    text: '面对一个全新的挑战，你的态度是？',
+    options: [
+      { label: 'A', text: '先看看别人怎么做，不做出头鸟', scores: { guoqi: 2, xiaodeng: 1 } },
+      { label: 'B', text: '先找相关文件和政策依据', scores: { tizhi: 3 } },
+      { label: 'C', text: '先做个PPT和roadmap出来', scores: { gaoguan: 2, waiqi: 1 } },
+      { label: 'D', text: '先查文献，做文献综述', scores: { xueshu: 3 } },
+      { label: 'E', text: '先发朋友圈，看看有没有资源对接', scores: { weishang: 2, mingyuan: 1 } },
+      { label: 'F', text: '干就完了，哪有那么多废话', scores: { shehui: 3 } },
+      { label: 'G', text: '先做数据分析，算清楚投入产出比再动手', scores: { jinrong: 3 } },
+    ]
+  },
+  {
+    text: '你如何看待"摸鱼"这件事？',
+    options: [
+      { label: 'A', text: '上班不摸鱼天理难容，但我摸鱼摸得很艺术', scores: { guoqi: 2, xiaodeng: 1 } },
+      { label: 'B', text: '上班时间就该上班，摸鱼是不负责任的表现', scores: { tizhi: 2, gaoguan: 2 } },
+      { label: 'C', text: 'Work hard play hard，效率到了随便摸', scores: { waiqi: 2, weishang: 1 } },
+      { label: 'D', text: '摸鱼？我连睡觉都在想课题', scores: { xueshu: 3 } },
+      { label: 'E', text: '我的每一分钟都是钱，摸鱼就是亏钱', scores: { weishang: 2, jinrong: 1 } },
+      { label: 'F', text: '我摸鱼我骄傲，我为公司省资源', scores: { shehui: 1, weishang: 1 } },
+    ]
+  },
+  {
+    text: '你的手机相册里最多的是？',
+    options: [
+      { label: 'A', text: '会议照片、文件翻拍、领导讲话截图', scores: { guoqi: 3, tizhi: 1 } },
+      { label: 'B', text: '咖啡拉花、健身记录、周末brunch', scores: { waiqi: 3 } },
+      { label: 'C', text: '论文截图、数据图表、学术海报', scores: { xueshu: 3 } },
+      { label: 'D', text: '产品图、客户反馈截图、收款记录', scores: { weishang: 3 } },
+      { label: 'E', text: '饭局合影、酒桌自拍、各种"总"的合照', scores: { shehui: 3, gaoguan: 1 } },
+      { label: 'F', text: '表情包、猫猫狗狗、各种截图', scores: { xiaodeng: 2, hulianwang: 1 } },
+      { label: 'G', text: '自拍、下午茶、酒店泳池、奢侈品开箱', scores: { mingyuan: 3 } },
+    ]
+  },
+  {
+    text: '如果要给自己写一句人生格言，你会写？',
+    options: [
+      { label: 'A', text: '"稳字当头，行稳致远"', scores: { guoqi: 3, tizhi: 1 } },
+      { label: 'B', text: '"Think different. Stay hungry."', scores: { waiqi: 3 } },
+      { label: 'C', text: '"做人嘛，最重要的是开心"', scores: { xiaodeng: 3 } },
+      { label: 'D', text: '"格局决定结局，态度决定高度"', scores: { gaoguan: 3 } },
+      { label: 'E', text: '"真理越辩越明，学问越做越深"', scores: { xueshu: 3 } },
+      { label: 'F', text: '"人活一口气，佛争一炷香"', scores: { shehui: 3 } },
+      { label: 'G', text: '"选择大于努力，跟上趋势才能赢"', scores: { weishang: 3 } },
+      { label: 'H', text: '"主打一个随缘 / 躺平就是最好的奋斗"', scores: { hulianwang: 3, xiaodeng: 1 } },
+      { label: 'I', text: '"你不理财，财不理你"', scores: { jinrong: 3 } },
+      { label: 'J', text: '"生活要有仪式感，精致女孩每一天"', scores: { mingyuan: 3 } },
+    ]
+  },
+  {
+    text: '你在电梯里遇到大领导，领导对你说"最近怎么样"，你会？',
+    options: [
+      { label: 'A', text: '"感谢领导关心！在您带领下我们团队士气高涨，这季度指标有望超额完成！"（说完自己都想吐）', scores: { guoqi: 3, gaoguan: 1 } },
+      { label: 'B', text: '"挺好的领导，正在落实您上次指示的精神，已经形成了专题报告初稿"', scores: { tizhi: 3 } },
+      { label: 'C', text: '"Yeah, pretty good! 我们team最近deliver了一个big project，改天我跟您sync一下"', scores: { waiqi: 2, hulianwang: 1 } },
+      { label: 'D', text: '"啊？……哦……还行……谢谢领导……"（然后开始抠手指）', scores: { xiaodeng: 2, mingyuan: 1 } },
+      { label: 'E', text: '"挺好的，王总上次那个方案我觉得还有优化的空间，回头我让助理发个修订版给您"', scores: { gaoguan: 3 } },
+      { label: 'F', text: '"最近在写一本关于电梯社交的论文，您愿意接受访谈吗？"', scores: { xueshu: 3 } },
+      { label: 'G', text: '"领导您气色真好！用的什么护肤品？"', scores: { shehui: 3 } },
+    ]
+  },
+  {
+    text: '你发现你的聊天对象把你拉黑了，你的第一反应是？',
+    options: [
+      { label: 'A', text: '截图发到工作群："大家看看，这同志还有没有组织纪律性？"', scores: { guoqi: 2, tizhi: 1 } },
+      { label: 'B', text: '"I mean… that\'s so unprofessional. 至少也要给个feedback吧？"', scores: { waiqi: 1, mingyuan: 1 } },
+      { label: 'C', text: '无所谓，反正也不熟，继续刷抖音', scores: { xiaodeng: 2, hulianwang: 1 } },
+      { label: 'D', text: '"格局小了，拉黑解决不了问题，要以德服人"（然后注册小号加回去）', scores: { gaoguan: 2, hulianwang: 1 } },
+      { label: 'E', text: '翻了一遍聊天记录，分析自己被拉黑的N个可能原因，得出结论：ta配不上我的学术高度', scores: { xueshu: 3 } },
+      { label: 'F', text: '"你是不是有什么误会？姐我这人最重感情了！"然后打电话过去质问', scores: { shehui: 3 } },
+      { label: 'G', text: '"可能是同行嫉妒我的业绩"截图发朋友圈配文"被嫉妒的感觉真好"', scores: { weishang: 2 } },
+    ]
+  },
+  {
+    text: '你收到一条短信说"恭喜您获得iPhone 16抽奖资格"，你的反应是？',
+    options: [
+      { label: 'A', text: '"这种不正当得利要不得，先报告保卫处"', scores: { guoqi: 2, tizhi: 1 } },
+      { label: 'B', text: '"Hmm, this looks like a scam, but let me check the URL first"', scores: { waiqi: 2 } },
+      { label: 'C', text: '点进去看看，万一是真的呢？反正我也没钱可骗', scores: { xiaodeng: 2, hulianwang: 1 } },
+      { label: 'D', text: '"这种低端营销手段，我发给团队当反面教材"', scores: { gaoguan: 2, jinrong: 1 } },
+      { label: 'E', text: '先截屏保存，然后在知网搜一下"电信诈骗受害者心理特征"', scores: { xueshu: 2 } },
+      { label: 'F', text: '直接删除——然后三秒后翻到回收站里又看了一遍', scores: { hulianwang: 2 } },
+      { label: 'G', text: '"这一定是老天在暗示我今年要换手机！"然后去拼多多找同款', scores: { mingyuan: 2 } },
+    ]
+  },
+  {
+    text: '你走在路上看到前面有个人背影特别像你前男友/前女友/暗恋对象，你会？',
+    options: [
+      { label: 'A', text: '加快脚步追上去确认——别被发现了，假装在接电话', scores: { guoqi: 2, xiaodeng: 1 } },
+      { label: 'B', text: '掏出手机假装看消息，余光持续追踪，同时分析偶遇概率的统计学意义', scores: { tizhi: 2, xueshu: 1 } },
+      { label: 'C', text: '"Oh my god, is that… no, it can\'t be… okay act natural, act natural"（同手同脚地走过了）', scores: { waiqi: 2 } },
+      { label: 'D', text: '拿出手机连拍十张背影，发到闺蜜群："家人们，帮我看看这是不是那个谁"', scores: { hulianwang: 2, mingyuan: 1 } },
+      { label: 'E', text: '"当初离开我是你的损失，看看我现在混的"（挺胸抬头走过去，根本没看清是谁）', scores: { gaoguan: 1, jinrong: 1 } },
+      { label: 'F', text: '追上去拍肩膀："好久不见，现在做什么生意呢？加个微信？"', scores: { weishang: 2, shehui: 1 } },
+      { label: 'G', text: '赶紧绕路走，实在不想面对那段不堪回首的过去', scores: { xiaodeng: 2 } },
+    ]
+  },
+
+  {
+    text: '朋友结婚要随份子钱，你的策略是？',
+    options: [
+      { label: 'A', text: '翻出单位发的红包袋装200块写"祝百年好合"', scores: { guoqi: 2, tizhi: 1 } },
+      { label: 'B', text: '微信转账888截图发朋友圈秀大方', scores: { waiqi: 2, mingyuan: 1 } },
+      { label: 'C', text: '"兄弟结婚我肯定得到！"然后在婚礼上喝多了', scores: { shehui: 3 } },
+      { label: 'D', text: '66.66问就是"六六大顺"其实就是穷', scores: { xiaodeng: 2, bailan: 1 } },
+      { label: 'E', text: '先问一圈同事随多少然后比平均数少一百', scores: { tizhi: 2, guoqi: 1 } },
+      { label: 'F', text: '发朋友圈"恭喜XX总大婚"人不到礼到', scores: { gaoguan: 2, weishang: 1 } },
+      { label: 'G', text: '研究婚宴菜单性价比一桌3888那随800', scores: { jinrong: 2, wenyi: 1 } },
+      { label: 'H', text: '带最新款筋膜枪当礼物结婚也要健身', scores: { jianshen: 2 } },
+    ]
+  },
+  {
+    text: '第一次去对象家见家长你会怎么做？',
+    options: [
+      { label: 'A', text: '提前三天准备带两瓶五粮液一条中华', scores: { guoqi: 2, shehui: 1 } },
+      { label: 'B', text: '带一箱水果一盒茶叶进门先鞠个躬', scores: { tizhi: 2, xiaodeng: 1 } },
+      { label: 'C', text: '"这是我从澳洲带回来的红酒"——京东买的', scores: { nanyang: 2, waiqi: 1 } },
+      { label: 'D', text: '打包PPT展示职业规划和资产状况', scores: { gaoguan: 2, jinrong: 1 } },
+      { label: 'E', text: '"叔叔你这茶叶不错"然后聊茶道养生', scores: { xueshu: 2, yangsheng: 1 } },
+      { label: 'F', text: '带儿童摄影套餐优惠券还没结婚就铺垫', scores: { baoma: 2 } },
+      { label: 'G', text: '"叔叔喝一个？"然后和准岳父称兄道弟', scores: { tufang: 2, yancao: 1 } },
+      { label: 'H', text: '穿紧身衣去聊了一个小时深蹲成绩', scores: { jianshen: 2 } },
+    ]
+  },
+  {
+    text: '朋友圈看到有人去世了但你和TA不熟？',
+    options: [
+      { label: 'A', text: '转发单位唁电配文"沉痛哀悼"', scores: { guoqi: 2, tizhi: 1 } },
+      { label: 'B', text: '点蜡烛emoji评论RIP', scores: { waiqi: 2, hulianwang: 1 } },
+      { label: 'C', text: '截图发闺蜜群"这人你们认识吗？"', scores: { shehui: 2, baoma: 1 } },
+      { label: 'D', text: '翻TA朋友圈看看然后默默划走', scores: { xiaodeng: 2, bailan: 1 } },
+      { label: 'E', text: '写五百字悼念文案虽然只加过好友聊过两句', scores: { wenyi: 2, mingyuan: 1 } },
+      { label: 'F', text: '"提醒我们要注意身体健康"转发养生文章', scores: { yangsheng: 2 } },
+      { label: 'G', text: '感慨人生无常打开炒股软件"继续持有"', scores: { jinrong: 2 } },
+      { label: 'H', text: '点了个赞然后赶紧取消心跳加速', scores: { hulianwang: 1, xiaodeng: 1 } },
+    ]
+  },
+  {
+    text: '你被踢出了家族群第一反应是？',
+    options: [
+      { label: 'A', text: '"这是组织的决定还是个人行为？"分析被踢原因', scores: { guoqi: 2, tizhi: 1 } },
+      { label: 'B', text: '"Oh well fine by me"终于不用看谣言了', scores: { waiqi: 2 } },
+      { label: 'C', text: '挨个私聊"二叔群里发生什么事了？"', scores: { shehui: 2, weishang: 1 } },
+      { label: 'D', text: '无所谓反正那个群我从来没看过', scores: { bailan: 2, xiaodeng: 1 } },
+      { label: 'E', text: '"是不是我说错什么了？"三小时自我反省', scores: { xueshu: 2, kaogong: 1 } },
+      { label: 'F', text: '"肯定是嫉妒我"发朋友圈"合不来就不合"', scores: { mingyuan: 2 } },
+      { label: 'G', text: '打电话给群主："爸你把我踢出群干啥？"', scores: { xiaodeng: 2 } },
+      { label: 'H', text: '正好把群里的谣言和砍价链接一并戒了', scores: { yangsheng: 2, hulianwang: 1 } },
+    ]
+  }
+];
+;
+
+// ================================================================
+// 数据：结果类型
+// ================================================================
+const types = {
+  guoqi: {
+    name: '国企登',
+    emoji: '🏢',
+    desc: '也就在日渐式微的制造业里面当个这总那总，出门了除了一口痰一条起毛刺的皮带，没人认识，就剩朝九晚五送孩子的福利了。但在公司里，你是会议发言专业户，一杯茶一份报能坐到下班。你的工作哲学是：能不干就不干，能推就推，能明天做就绝不今天做。对年轻人说得最多的是"年轻人要沉得住气"——翻译过来就是：老子当年也是这么被熬过来的，你小子也别想舒坦。办公室是你的第二个家，你在这见证了六任领导的更替，而你还坐在同一个位置——这就是你最大的胜利。',
+    analysis: '你的老登技能点主要加在了"沉稳"和"老道"上。你深谙国企生存法则：不出错不冒头，活着就是胜利。你以为自己是个总，其实出了厂区大门，除了一口老痰和起毛边的腰带，没人认识你。不过没事，你有别人没有的——稳定的穷。',
+    quote: '"我个人补充三点意见……（第一点：今天天气不错）（第二点：这事儿不急）（第三点：下次再说）"',
+    tags: ['皮带起毛刺', '厂区一亩三分地', '会议发言专业户', '送孩子上学'],
+    similar: ['tizhi', 'gaoguan'],
+    faq: '为什么国企登明明啥也没干却看起来最忙？因为忙不忙不重要，看起来忙才重要。茶要一口一口喝，报要一张一张看，这叫节奏。',
+    radar: [90, 60, 85, 30, 40]
+  },
+  tizhi: {
+    name: '体制登',
+    emoji: '📋',
+    desc: '政治站位极高，文件学习从不落下。张口闭口"提高认识""压实责任""建立健全长效机制"——说了一大堆等于啥也没说但听起来特别有水平。朋友圈全是学习强国转发，每天打卡比吃饭还准时。开会必带笔记本，翻开永远只有第一页写了日期和标题，后面全是白纸——因为会上说的内容你早就知道。白衬衫黑裤子的忠实信徒，衣柜里七件同款白衬衫，因为不用花时间想搭配。你是单位最稳定的存在——不是因为你能力强，是因为你待得久。铁打的老登流水的领导，你比每一任都更懂潜规则：少做少错不做不错，做了就是你的错。',
+    analysis: '你的登味中透着一种"正气"。你相信凡事都有规矩，按流程走就不会出错。你是各种政策文件的活字典，也是团队里的"规矩守护者"。不过有时候，灵活一点也是好事——不是所有事都需要打报告的。',
+    quote: '"这个事，我们还是要提高政治站位，压实主体责任，建立健全长效机制……"',
+    tags: ['白衬衫', '公文包', '学习强国', '第一议题'],
+    similar: ['guoqi', 'xueshu'],
+    faq: '体制登和学习强国是什么关系？不是在学习强国，就是在去学习强国的路上。今天你满分了吗？',
+    radar: [95, 40, 50, 25, 30]
+  },
+  waiqi: {
+    name: '外企登',
+    emoji: '🌍',
+    desc: '中英文混合输出机器，一句话不夹三个英文单词不会说话。Weekend一定要有brunch，健身一定要打卡，咖啡必须是手冲。Performance review是每年的人生大考，拿不到meet expectations会焦虑到失眠。口头禅："这个我们要align一下"。',
+    analysis: '你的登味带着一股拿铁香气。你追求work-life balance，但实际上work和life已经混在一起分不清了。你的英文水平在写邮件时达到巅峰，但真正和老外开会时还是会在心里悄悄说"Sorry?"。',
+    quote: '"Let’s sync一下这个proposal，我觉得需要align一下双方的expectation。"',
+    tags: ['MacBook', '手冲咖啡', '健身房打卡', '中英文夹杂'],
+    similar: ['gaoguan', 'mingyuan'],
+    faq: '外企登为什么要中英文夹杂？有些词用中文说出来实在太羞耻了，比如"核心竞争力和可持续性发展的对齐"。还是说align比较不尴尬。',
+    radar: [30, 55, 40, 85, 20]
+  },
+  xiaodeng: {
+    name: '小登',
+    emoji: '🐣',
+    desc: '你小时候是不是模仿过五道杠？小学就习惯用抑扬顿挫的语气命令同学给你打扫抽屉？虽然现在还是个萌新，但你体内已经流淌着成为老登的血液。你就像一块正在腌制的嫩肉——已经有了那个味道，但火候还差着十万八千里。见谁都叫老师，开会只负责点头假装听懂了。工位上堆满了手办和零食，电脑桌面还是二次元老婆。你最大的日常烦恼是：中午吃什么、周报写什么、以及怎么让领导觉得你很忙的同时啥也不干。别急，这些技能你迟早会学会的——每个老登都曾经是个小登。',
+    analysis: '你还是个登界新兵，登味尚浅，但天赋异禀。你的眼睛里还有光，还没有被职场磨平棱角。珍惜这段时光吧——再过两年，你可能就看不懂自己现在的回答了。不过话说回来，谁不是从小登成长起来的呢？',
+    quote: '"好的好的收到谢谢老师！（转头：这啥意思啊？百度一下……）"',
+    tags: ['五道杠预备役', '双肩包', '清澈的愚蠢', '萌新光环'],
+    similar: ['hulianwang', 'weishang'],
+    faq: '小登还有救吗？有救——只要别在工位上摆满手办和零食，别见谁都叫老师，就还有救。',
+    radar: [20, 15, 60, 50, 10]
+  },
+  gaoguan: {
+    name: '高管登',
+    emoji: '👔',
+    desc: '常年飞行模式，日程表以15分钟为单位切割，但真正干活的时间只有5%。最擅长把简单的事情说得极其复杂："下班"叫"优化生命周期"，"裁人"叫"组织架构优化升级"。画饼功力已入化境，能把KPI包装成改变人类命运的壮举。办公室桌上必放"厚德载物"或"上善若水"——虽然你既没有德也没有水。你的超能力是：说了四十分钟后所有人都觉得很有道理，但没有一个人记得你到底说了什么。你的秘诀：先否定现状，再画个愿景，然后说"这个需要大家群策群力"——等于什么都没说，但所有人都在点头记笔记。',
+    analysis: '你的登味已经带有一种"领袖气质"了。你擅长把"我们要赚钱"包装成"我们要创造价值"，把"我不知道"说成"这个需要大家群策群力"。你最大的超能力是：在说了一大堆之后，好像什么都说了，又好像什么都没说。',
+    quote: '"我们要有格局，要有闭环思维，把这个赛道打透，形成商业的正向飞轮效应。"',
+    tags: ['落地窗办公室', '商务舱', 'PPT艺术家', '画饼宗师'],
+    similar: ['guoqi', 'jinrong'],
+    faq: '高管登的PPT为什么永远做不完？因为PPT不是用来汇报的，是用来续命的。PPT在，工位在；PPT做完，离被裁也不远了。',
+    radar: [85, 70, 30, 60, 80]
+  },
+  xueshu: {
+    name: '学术登',
+    emoji: '📚',
+    desc: '不是在写本子就是在审本子的路上。任何话题都能扯到自己的研究领域——"今天天气不错"在你这里会变成"从气象学多尺度耦合机制视角来看，今天的高压系统控制下……"。没人听懂你在说什么，但大家都点头表示确实。职称评定是你的一生之敌也是一生追求——你发论文不是为了改变世界，是为了评职称。格子衫加牛仔裤是你的标准配置，发际线和学术水平呈严格反比。最自豪的时刻是论文被接收的那天，然后第二天又开始焦虑下一篇。朋友圈就是你的个人学术成果展——除了你和三个同行，根本没人看。',
+    analysis: '你的登味里透着一种"学术的芬芳"。你有着把任何日常对话变成学术研讨的超能力。"今天天气不错"在你这里会变成"从气象学角度看，今天的高压系统控制下……"。你的朋友圈就是个人学术成果展，但说实话，大家基本看不懂。',
+    quote: '"这个我们在《自然》子刊上发表过，从学术角度来看，这个问题非常有意思……"',
+    tags: ['格子衫', '发际线后移', '论文焦虑', '职称一生之敌'],
+    similar: ['tizhi', 'guoqi'],
+    faq: '学术登为什么发际线这么高？每一篇论文的发表，都伴随着一百根头发的牺牲。你看到的不是发际线，是你的学术成就线。',
+    radar: [60, 30, 55, 20, 25]
+  },
+  shehui: {
+    name: '社会大姐登',
+    emoji: '💪',
+    desc: 'Well well well，登本来是形容男人的味道，一个女性获得登味不容易。年轻时候是精神小妹，老了变成大姐大PUA新人女性。虽然贵为女士但登起来可一点不比男人差，而且也就在拉闸熄灯的年龄对年轻女性登一登，真遇到县城刀枪炮马上回归小鸟依人的媚眼态，啧啧，记得涂防皱美白霜。',
+    analysis: '你的登味是岁月沉淀下来的老火靓汤。你走过的桥比小年轻走过的路还多，你PUA过的新人比他们吃过的盐还多。江湖上流传着你的传说，但你自己心里清楚——再凶的大姐大，看到真正的社会哥也得乖乖叫一声"哥哥好"。啧，女人。',
+    quote: '"多大点事儿！这事儿包我身上了！（转头：老公你说呢？）"',
+    tags: ['精神小妹进化史', 'PUA新人专业户', '欺软怕硬', '记得涂防皱霜'],
+    similar: ['weishang', 'mingyuan'],
+    faq: '社会大姐登怕什么？天不怕地不怕，就怕老公说"这事儿我做不了主"。和年轻妹妹们说一句：社会路滑，人心复杂。',
+    radar: [40, 85, 30, 60, 75]
+  },
+  weishang: {
+    name: '微商登',
+    emoji: '📱',
+    desc: '朋友圈就是你的战场，每天醒来先发三条正能量。喜提和谐号、喜提玛莎拉蒂是常规操作，虽然没人见过你的车——因为那是花九块九在网上买的素材。发展下线比搞业务更积极，逢人就问"有没有兴趣了解一下"，连你妈都被你发展成了代理。朋友圈文案风格独树一帜：满屏感叹号、💰符号、某某总又喜提了什么——以及那句"跟着我干，月入六位数不是梦！"但你上个月的支付宝入账是327块5。你最大的成就不是收入，是成功让全朋友圈的人把你屏蔽了。',
+    analysis: '你的登味里充满了"财富自由"的诱惑。你是朋友圈最勤奋的创作者，每天从早安正能量到晚安心灵鸡汤，产量堪比专业媒体。你的成功学语录库存堪比图书馆，但大家私下都在猜你到底赚到钱了没有。不过话说回来，这份毅力用在正道上，干啥都能成。',
+    quote: '"恭喜XX总喜提玛莎拉蒂！跟着XX总干，月入六位数不是梦！你还在犹豫什么？🔥🔥🔥"',
+    tags: ['朋友圈刷屏', '喜提专业户', '代理招募', '正能量大师'],
+    similar: ['shehui', 'jinrong'],
+    faq: '微商登到底赚到钱了吗？这个问题就像问你朋友圈那些喜提玛莎拉蒂的人真的提车了吗——答案在风中飘扬。',
+    radar: [20, 80, 25, 95, 50]
+  },
+  hulianwang: {
+    name: '互联网白兔登',
+    emoji: '🐰',
+    desc: '互联网大厂的老白兔，工龄五年以上，技术栈停留在刚入职那年——那年React才出到16，现在是19，但你还在写class component，因为学不动了。当年也是写过代码的，现在code review只看缩进不看逻辑——不是不想看，是看也看不懂了。你的日常工作：早上十点半到工位，先刷半小时脉脉看看有没有自己公司的瓜，然后开一个不需要你发言的站会，中午吃个饭睡到两点，下午写写周报顺便给新人提几个"建议"——刷存在感是你的核心KPI。你最大的恐惧是：公司某天突然开始搞末尾淘汰。',
+    analysis: '你的登味是互联网大厂特供版——混合了优越感、不安全感和技术退化的特殊气味。你的核心技能不是写代码，是写PPT和汇报。你深知大厂生存真谛：代码越好活越多，PPT越炫职级越高。你选择了一条捷径：把新人往死里卷，自己啥也不干。你的年终总结里"推动"了8个项目，"赋能"了12个团队，但你的pull request在去年只有3个——其中一个还是改了个README错别字。你的存在本身就是互联网大厂中年危机的最佳注脚。',
+    quote: '"这个方案我之前就想过了……（沉思状）……具体记不太清了，但方向肯定没错。你先做一版我看看。（然后你根本没看就提了一堆意见）"',
+    tags: ['工龄五年技术归零', '汇报型人才', '新人克星', '脉脉深度用户'],
+    similar: ['xiaodeng', 'gaoguan'],
+    faq: '互联网大厂的老白兔最怕什么？怕公司搞"拥抱变化"——在这个工位坐了五年，突然让去搞AI，连prompt engineering的p怎么拼都要查半天。还有更怕的：新来的VP是你十年前带过的实习生。',
+    radar: [75, 50, 65, 40, 85]
+  },
+  jinrong: {
+    name: '金融登',
+    emoji: '📈',
+    desc: '张口闭口"今年这行情"，手里拿着五万块操着五百亿的心。早餐标配是财经新闻，朋友圈必转"2026年投资策略展望"。你买了二十本投资理财的书，翻了前三页就放书架上吃灰了。牛市觉得自己是巴菲特再世，熊市默默删掉炒股软件假装没开户。你的投资组合里有：37块的腾讯、14块的小米、还有一只ST股你还没舍得卖因为"要触底反弹了"。每天看盘八小时实际交易零次——你在等"最佳入场点"，从开户到现在最佳入场点出现了327次，你一次都没抓住。',
+    analysis: '你的登味里飘着一股铜臭味（褒义）。你对K线图的热情超过了对任何异性的热情，你的投资组合里永远有一只"下周就起飞"的票。虽然目前账户还是环保色，但你坚信"价值投资，长期持有"——毕竟已经被套牢了，不长期持有还能咋办？',
+    quote: '"这个位置性价比很高，性价比很高，懂的都懂。（其实上周刚割肉割在地板上）"',
+    tags: ['K线大师', '价值投资（自封）', '财经新闻当早餐', '账户绿化大使'],
+    similar: ['gaoguan', 'waiqi'],
+    faq: '金融登的账户为什么永远是绿的？因为环保。价值投资嘛，长期持有嘛，被套牢了总要找个体面的说法。',
+    radar: [50, 65, 35, 75, 45]
+  },
+  mingyuan: {
+    name: '名媛登',
+    emoji: '👑',
+    desc: '朋友圈堪比时尚杂志，九宫格照片必须精修半小时。下午茶是标配，定位必须五星级酒店大堂——因为她也只住得起大堂吧。拼单群里的常客，今天宝格丽明天半岛，同一件泳衣换了八个背景拍了一个月，连酒店服务员都认识她了："又是那个只点一杯苏打水拍一天的小姐姐？"看似光鲜亮丽，实则信用卡刷爆，最多的时候同时欠八张卡，拆东墙补西墙维持精致人生。催收电话打到爆的时候发一条朋友圈："岁月静好，不被世俗打扰✨"然后关掉手机继续焦虑。"女生要对自己好一点"——翻译过来就是：哪怕下个月吃土，这个月也要把卡刷爆。',
+    analysis: '你的登味散发着高级香水的味道——确切说是试用装的味道。你的照片永远活在精修世界里，真实生活里的外卖盒和快递堆是不会出镜的。你是拼多多名媛群的资深会员，用一杯奶茶的钱体验了人生的高光时刻，拍完照赶紧把衣服退了。',
+    quote: '"生活需要仪式感✨ / 女孩子就是要精致呀💅 / 今日份的快乐是和自己约会🥂（然后默默还信用卡）"',
+    tags: ['九宫格精修', '五星级下午茶众筹', '拼单名媛', '精致穷'],
+    similar: ['weishang', 'waiqi'],
+    faq: '名媛登的精致生活是真的吗？照片是真的精修的，定位是真的五星级酒店大堂，拼单也是真的拼的。信用卡也是真的要还的。',
+    radar: [15, 70, 20, 98, 30]
+  },
+  jinghu: {
+    name: '京沪登',
+    emoji: '🏙️',
+    desc: '一线城市土著新土著，家里有房有户口，优越感写在脸上。最擅长在任何话题中不经意地提到"我在北京/上海的时候"。吃饭必点评"这个不如我们那边的正宗"——好像全中国的菜都是为了讨好你们家楼下的馆子才发明的。你的存在意义就是告诉所有人：虽然你月薪八千但你家的老破小值八百万。你最大的焦虑是新来的同事居然也是本地人——你的优越感受到了威胁。最怕别人问你"你哪个区的"——因为说出来不够体面。你是城市最后的情怀主义者，一边骂外地人太多一边享受着外地人送的外卖和快递。',
+    analysis: '你的登味里透着一股包浆的老钱味——不，不是老钱，是老家拆迁分的钱。你的优越感刻在骨子里，哪怕住在老破小也要让外卖小哥知道你是正经城里人。你每天刷本地资讯不是为了获取信息，是为了确认自己还在一线城市——这个你唯一拿得出手的身份标签。你最大的恐惧是房价跌了，因为那意味着你唯一的优越感来源也要没了。你在互联网上的一切争论最终都会落脚在"你户口在哪"。',
+    quote: '"我跟你说在北京/上海这种事情根本不会发生……（然后开始二十分钟的对比）"',
+    tags: ['户口本战神','老破小也是房','外地人勿近','拆迁致富'],
+    similar: ['gaoguan','mingyuan'],
+    faq: '京沪登为什么总提一线城市？因为除了户口和老破小实在没什么拿得出手的了。',
+    radar: [60, 75, 40, 85, 50]
+  },
+  nanyang: {
+    name: '南洋登',
+    emoji: '🌏',
+    desc: '海外镀金归来留学生回国，说话中英文夹杂还带口音——不是纯正的英美音，是一种混合了中式发音和刻意模仿的杂交品种。最怕别人问"你回国多久了"——因为回来三年了还天天说"在国外的时候"。朋友圈定位永远在国外虽然那是上个月的。你最大的谈资是在国外的生活，但你在海外其实就是读了个一年制水硕，每天的活动范围不超过学校图书馆和宿舍两点一线。回来发现海归也不值钱了，你的留学经历在HR眼里只值比国内应届生多五百块的起薪。',
+    analysis: '你的登味里飘着一股混合了咖啡和乡愁的味道。在国外的一年是你人生最高光的时刻，所以你决定用余生来反复讲述它。你最痛苦的是国内奶茶太好喝了国外的奶茶是shit——这是你唯一能证明自己在国外待过的实质性证据。你留学的最大收获不是知识，是一口说不清哪国口音的英语和可以在简历上写一行的学校名字——虽然99%的中国人没听说过。',
+    quote: '"我在澳洲/英国/美国的时候blah blah blah……（然后发现没人感兴趣默默闭嘴）"',
+    tags: ['一年制水硕','海归不值钱','中英文夹击','留学是一生巅峰'],
+    similar: ['waiqi','jinghu'],
+    faq: '南洋登为什么总提国外的事？因为那是他人生最高光的时刻。',
+    radar: [30, 60, 35, 80, 25]
+  },
+  tufang: {
+    name: '土方登',
+    emoji: '🏗️',
+    desc: '土老板包工头拆迁暴发户，手里有点钱但审美停留在上世纪八十年代。脖子上挂金链子手上戴大金表，车里放着一盒中华但不是自己抽的是拿来发给别人的——你自己抽的是二十块的利群。最常说"钱能解决的问题都不是问题"——虽然你小学文化，写自己的名字都费劲。最大的爱好是唱歌洗浴一条龙，KTV必唱《朋友》，唱到动情处拍着旁边不熟的人的肩膀喊兄弟。最怕的事情是别人让你说普通话——一开口就是一股大碴子味，瞬间暴露你的出身。你的微信头像永远是你和某个你其实不熟的领导的合影。',
+    analysis: '你的登味是一股混合了柴油香烟和汗味的原始气息。你是改革开放先富起来的那批人——虽然你的致富方式谁也说不清楚。你的审美法则简单粗暴：越贵越好越大越好金色最好。你买的所有东西都有同一个特点——logo够大。你最大的恐惧是有文化的人，因为你分不清他们是在说真话还是在内涵你。你在任何饭局上都喜欢抢着买单但不是因为你大方，是因为你想听别人说那句"X总大气"。',
+    quote: '"这个项目我投了！不就几百万的事嘛。那个……小x合同你帮我看看写了啥。"',
+    tags: ['金链子大哥','KTV必唱朋友','大奔才是车','小学文化暴发户'],
+    similar: ['shehui','weishang'],
+    faq: '土方登为什么喜欢金链子？因为除了金链子想不出还能怎么证明自己有钱。',
+    radar: [40, 85, 20, 90, 70]
+  },
+  wenyi: {
+    name: '文艺登',
+    emoji: '🎭',
+    desc: '文艺中年，豆瓣小红书深度用户，从头发丝到脚后跟都在告诉别人"我和你们这些俗人不一样"。听歌必须听独立乐队，看电影必须看欧洲文艺片，读书必须读没人听说过的外国作家。你的豆瓣书影音标记了三千条，但你真正看完的不超过三百条。口头禅是"这个太大众了"——用来评价一切流行事物，仿佛鄙视流行就能证明你的品味比别人高。但你那些小众品味其实也是从榜单上抄来的，只是你嘴硬不承认。你最大的恐惧是有人跟你深入聊你推荐的那些作品——因为你只看了简介和豆瓣短评。',
+    analysis: '你的登味是一股旧书和檀香混合的味道。你是文化界的职业装逼犯，用鄙视链来填补内心的空虚。你的歌单里全是那些你其实不怎么听但说出来很有品位的乐队——你连主唱叫什么都不知道。书架上的哲学书和诗集不是用来读的，是用来当拍照背景的。你精心营造的人设在你家乱糟糟的阳台晾晒的内衣裤面前不堪一击。你的ins和小红书是你精心维护的第二个自我——一个根本不存在的、有品位的你。',
+    quote: '"这个太商业化了。我建议你去看看XXX那才是真正的艺术。"',
+    tags: ['鄙视链顶端','小众即正义','豆瓣深度用户','装腔指南'],
+    similar: ['xueshu','mingyuan'],
+    faq: '文艺登为什么只喜欢小众？因为大众的东西装逼门槛太高。',
+    radar: [20, 55, 45, 70, 15]
+  },
+  baoma: {
+    name: '宝妈登',
+    emoji: '👶',
+    desc: '晒娃达人育儿专家，三句话不离孩子，任何话题都能拐到"我们家孩子"。朋友圈一天发九条全是孩子视频——吃饭拍睡觉拍写作业也拍，你的人生摄像机永远对准孩子从不对准自己。你的个人身份已经完全被"XX妈妈"取代，以至于你老公都忘了你叫什么名字。你坚信你的育儿方法最科学——但你所有的知识都来自抖音育儿博主和妈妈群的互相安慰。你最大的敌人是那些"没有孩子所以不懂"的人。你的孩子将来大概率会在心理咨询室里哭着控诉你在他小时候把他拉的每一泡屎都发到了朋友圈。',
+    analysis: '你的登味是奶粉和湿纸巾混合的味道。你已经完全失去了自我——你的微信名是"XX妈妈"，头像是你家孩子，朋友圈每一条都和育儿有关。你的人生重心完全偏移到了另一个人类身上，以至于你已经记不起来自己上一次为自己做一件事是什么时候。你和老公上一次单独约会是在孩子上幼儿园的第一天——那是三年前。你坚信这一切牺牲都是值得的，但你在深夜刷到闺蜜在马尔代夫的照片时还是会默默点个赞然后叹一口气。',
+    quote: '"我们家宝贝今天考试又得了第一名！（附九宫格照片每一张的头偏的角度都不一样）"',
+    tags: ['晒娃战斗机','育儿专家自封','微信名叫XX妈妈','孩子就是宇宙中心'],
+    similar: ['shehui','mingyuan'],
+    faq: '宝妈登为什么一天发九条孩子动态？因为除了孩子没有其他话题了。',
+    radar: [25, 70, 30, 75, 40]
+  },
+  yangsheng: {
+    name: '养生登',
+    emoji: '🌿',
+    desc: '养生达人保温杯里泡枸杞，但杯子里泡的究竟是什么取决于你今早刷到的公众号推荐了什么。养生知识全部来自家族群和养生公众号——"震惊！这种食物吃了会致癌！""转发给家人！这样做能多活十年！"你相信一切伪科学怀疑一切现代医学。最怕死但最不相信医生。市面上最贵的保健品一定是你买的——虽然它们唯一的功效就是让你的尿变得更贵。你最大的矛盾是：一边花大价钱买各种补品，一边抽着烟喝着酒安慰自己说"适量没事"。你的手机里有二十个养生群，你平均每天转发十条养生文章——你家人已经把你设为消息免打扰了。',
+    analysis: '你的登味是中药艾灸和伪科学混合的刺鼻气味。你是养生公众号的忠实信徒、家族群里的首席谣言传播官。你深信排毒经络酸碱体质这些被科学打脸一万次的概念——你分不清中医和伪科学的界限因为你觉得两者都"有道理"。你越养生越焦虑，因为你发现所有食物都有毒、所有习惯都致癌、所有日常用品都含甲醛。你活着的每一天都是在和这个世界的有毒物质做斗争——但你从来不斗争你的烟和酒，因为它们是你为数不多的快乐来源。',
+    quote: '"这个不能吃那个不能喝我跟你讲啊这些都是致癌的！（然后端起泡着枸杞的白酒抿了一口）"',
+    tags: ['保温杯玄学','公众号信徒','越养生越焦虑','只信偏方不信医生'],
+    similar: ['guoqi','tuixiu'],
+    faq: '养生登一边养生一边抽烟喝酒什么逻辑？养生是安慰剂烟酒是必需品。',
+    radar: [30, 55, 40, 45, 20]
+  },
+  yancao: {
+    name: '烟草登',
+    emoji: '🚬',
+    desc: '老烟枪烟不离手，走在路上抽开会前抽吃完饭抽等车抽上厕所也抽——你的生活节奏是由"抽烟"和"不抽烟的间隙"组成的。身上永远有一股洗不掉的烟味，三米外就能被闻出来你是那个在楼道里偷偷抽烟的人。你在任何禁烟场合的第一反应是"还有多久可以抽"。你的手指被熏黄了声音被熏哑了，你拍胸片的时候医生看着你的肺沉默了五秒钟。你坚信"不抽烟的人活那么久干嘛"。你试过戒烟312次最长一次坚持了6小时——那6小时里你焦虑到差点把办公桌啃了。你每个月花在烟上的钱比你妈的生活费还多，但你从来没算过这个账。',
+    analysis: '你的登味就是你身上的烟味——浓郁到三米外都能准确识别。你是行走的吸烟室人类版的烟灰缸。你身上总有打火机但从来没有打火机是你自己买的——因为你的打火机平均存活时间不超过三天，不是在酒桌上被人顺走了就是落在某个饭馆的桌上了。你坚信吸烟是你最后的爱好——也是你家人最希望你放弃的爱好。你的肺活量已经退化到上两层楼就喘，但你把这种喘息声解释为"锻炼心肺功能"。你每次咳嗽的时候都发誓要戒烟，咳完点上一根说"慢慢来"。',
+    quote: '"饭后一支烟赛过活神仙。（咳嗽……咳咳……）这烟质量不行。"',
+    tags: ['行走的烟灰缸','戒烟三百次','黄手指认证','肺癌预备役'],
+    similar: ['tufang','shehui'],
+    faq: '烟草登为什么不戒烟？因为戒了烟他就没有任何爱好了。',
+    radar: [30, 60, 50, 25, 35]
+  },
+  kaogong: {
+    name: '考公登',
+    emoji: '📝',
+    desc: '一直在考编从没上过岸，青春全部献给了行测和申论。你是考公机构的终身VIP客户，书架上堆满了粉笔华图中公的资料——每本都只做了前三页。你的经典语录"今年再考一次考不上就算了"——这句话你已经连续说了六年。你最大的焦虑是三十岁了还没有稳定工作，你最大的安慰是还有考公这条路可以走。你的人生以考试为单位计量，年龄用"考了几年"来表述——"我今年25岁，考了三年了"。你看到"报名"两个字就条件反射手抖，看到"公示"两个字就心跳加速到180。你不敢算自己这些年花在培训费和报名费上的钱——因为那个数字会让你当场哭出来。',
+    analysis: '你的登味是打印纸和中性笔混合的墨香。你是中国最努力的一批人，也是最焦虑的一批人。你已经形成了条件反射：看到桌子就想铺开卷子做题，看到时事新闻就下意识分析这道题会怎么考。你最大的恐惧不是考不上而是考上了发现体制内也不是你想象的那样——这个念头在你脑海里一闪而过就被你掐灭了，因为你已经没有退路了。你第二大的恐惧是你的竞争对手比你小十岁——他们管你叫"叔叔"然后在考场上比你多考了十分。你的青春在题海里流逝，你甚至没时间谈一场恋爱。',
+    quote: '"今年再考最后一次真的最后一次了……（然后报名了下一年的培训班）"',
+    tags: ['终身备考','行测申论PTSD','公考机构财神爷','三十岁还没上岸'],
+    similar: ['tizhi','xiaodeng'],
+    faq: '考公登为什么不先找个工作干着？因为简历上除了备考公务员六个字什么也写不出来。',
+    radar: [50, 25, 35, 30, 15]
+  },
+  bailan: {
+    name: '摆烂登',
+    emoji: '🛋️',
+    desc: '彻底躺平无欲无求，活着就是胜利。你的生活哲学：能躺着绝不坐着能叫外卖绝不下楼能明天做绝不今天做——今天能拖到明天是你的人生信条。你的工位是公司最乱的那个——不是因为你忙，是因为你懒得收拾，上周的外卖盒还在桌子底下。你的人生格言是"差不多就行了"——这个"差不多"的尺度已经宽到包括你的工资、你的身材和你的人生规划。你最大的成就是躺在床上刷手机连续12小时不重样——从抖音刷到小红书再到淘宝再回到抖音，实现了完美的信息流闭环。你的口头禅"随意""都行""无所谓"背后藏着的是：你根本就没有在乎的事情。',
+    analysis: '你的登味是一股三天没洗头的味道。你是消费主义的绝缘体奋斗逼的天敌。公司的KPI你从来不放心上，因为反正垫底的不是你一个人——只要有人比你更烂你就安全了。你的人生既不焦虑也不兴奋，你处于一种稳定的温吞水状态，体温常年维持在36.5度情绪也是。你不是躺平不是摆烂，你只是单纯的、彻底的、发自内心的懒——懒到连换个姿势躺着都嫌累。你妈催你找对象的时候你连反驳都懒得反驳，直接回一句"行行行知道了"然后继续刷手机。',
+    quote: '"啊？……行吧……随便……都可以……（然后继续刷手机）"',
+    tags: ['专业躺平','KPI绝缘体','懒得洗头','差不多先生'],
+    similar: ['xiaodeng','hulianwang'],
+    faq: '摆烂登还有救吗？等他穷到连外卖都点不起的时候。',
+    radar: [15, 30, 95, 15, 10]
+  },
+  tuixiu: {
+    name: '退休登',
+    emoji: '👴',
+    desc: '已经退休或提前退休，广场舞主力军兼小区情报站站长。你的生物钟比闹钟还准：早上六点去公园打太极顺便听一耳朵退休金政策，上午九点超市抢特价菜和同龄人挤成一团，下午两点麻将桌或者小区象棋摊准时开战，晚上七点广场舞雷打不动——你比上班的时候还忙。你最大的资产是退休金，最大的谈资是儿子的工资和孙子的成绩，最大的烦恼是邻居家的狗在你跳舞的地方拉了一泡屎。你的人生信条是"我吃过的盐比你吃过的饭还多"——但你吃的盐也确实多，你的血压就是最好的证明。你觉得现在的年轻人吃不了苦，但你忘了你当年吃过的苦是你拼了命不想让子女吃的。',
+    analysis: '你的登味是一股樟脑丸混合红花油的味道。你是时间最富有的人——每天有24小时不知道该怎么花。你花了四十年等退休，退休后第一周很爽，第二周就开始无聊了。你的社交圈比年轻人的微信好友还广——菜市场三个摊主公园五个舞伴小区门口七个保安都认识你。你最大的骄傲是"我不花儿子的钱"，最大的心酸也是"我不花儿子的钱"——因为你儿子也没给过你。你每天都在跟同龄人比较：比谁的退休金高、比谁的孩子有出息、比谁的身体好。比你好的你嫉妒，比你差的你同情——这是你晚年生活的主要精神活动。',
+    quote: '"你们年轻人啊就是吃不了苦。我当年……（忆苦思甜一小时）"',
+    tags: ['广场舞战神','超市特价猎人','退休金王者','忆苦思甜专业户'],
+    similar: ['guoqi','yangsheng'],
+    faq: '退休登为什么每天那么忙？要把年轻时没时间做的事补回来——主要是补闲。',
+    radar: [65, 50, 80, 40, 35]
+  },
+  jianshen: {
+    name: '健身登',
+    emoji: '💪',
+    desc: '健身房常客蛋白粉当饭吃，朋友圈一半是健身房更衣室镜子前的半裸自拍——肌肉充血的时候拍流汗的时候拍穿着紧身衣的时候拍。你的话题永远离不开"今天练了什么""吃了多少蛋白""体脂率多少"。你的冰箱里没有正常食物只有鸡胸肉西兰花和蛋白粉，你的社交生活全部围绕着健身房展开，你的朋友里有一半是在健身房认识的。你最大的成就是卧推重量又涨了五公斤，你最大的焦虑是休息日会不会掉肌肉。你坚信"健身改变人生"——但你的人生除了健身好像也没有别的了。你每天在镜子前的时间比你陪家人的时间还长。你确实练得不错，问题是练得不错又怎样呢？',
+    analysis: '你的登味是蛋白粉汗水和男性香水混合的刺鼻味道。你是健身房的活招牌——不是因为练得好是因为待得久，所有人都认识你这个每天都来打卡的健身公务员。你每天花两小时在健身房一小时在去健身房的路上半小时准备健身餐——你的生活被健身切割成了精确的模块。你的蛋白粉花费已经够买一辆二手车了但你依然觉得"投资身体是最值的"。你那个除了健身啥也没有的人生就像你的肌肉一样——看起来很壮，但真要派上用场的时候你发现除了拍照片好像也没啥用武之地。你在镜子前停留的时间比你在任何一段感情里停留的时间都长。',
+    quote: '"今天练背充血效果不错。（附更衣室镜子前半裸自拍配文：只有汗水不会欺骗你）"',
+    tags: ['更衣室自拍狂','蛋白粉当饭吃','体脂率焦虑','肌肉比命重要'],
+    similar: ['waiqi','mingyuan'],
+    faq: '健身登为什么这么爱秀肌肉？因为不秀的话肌肉不是白练了吗。',
+    radar: [20, 60, 25, 80, 30]
+  }
+};
+
+
+// ================================================================
+// Avatar image data URIs (base64 SVG)
+// ================================================================
+const AVATAR_IMAGES = {
+  guoqi: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzY2NiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTQ1IiB5PSIyODAiIHdpZHRoPSIxMTAiIGhlaWdodD0iMzAiIHJ4PSI0IiBmaWxsPSIjZGRkIiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  tizhi: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTQ1IiB5PSIyODUiIHdpZHRoPSIxMTAiIGhlaWdodD0iMjgiIHJ4PSI0IiBmaWxsPSIjZmZmIiBzdHJva2U9IiNjY2MiIHN0cm9rZS13aWR0aD0iMiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  waiqi: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzU1NSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjQ4IiBjeT0iMTYwIiByPSIxNiIgZmlsbD0iIzZjNSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  xiaodeng: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2ZjZThkMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTEzMCAyMDAgUTExMCAyMjAgMTMwIDI0NSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjYiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  gaoguan: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzQ0NCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTQ1IiB5PSIyODUiIHdpZHRoPSIxMTAiIGhlaWdodD0iMzUiIHJ4PSIzIiBmaWxsPSIjMWEyNjM0IiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  xueshu: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzQ0NCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjMiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjxjaXJjbGUgY3g9IjIzMiIgY3k9IjE4MCIgcj0iMTgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg4OCIgc3Ryb2tlLXdpZHRoPSIzIiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  shehui: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwYzhhMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzIyMiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iOTUiIHI9IjU1IiBmaWxsPSIjMjIyIiBjbGlwLXBhdGg9InVybCgjYykiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMjUiIHI9IjEyIiBmaWxsPSIjZmZkNzAwIiBjbGlwLXBhdGg9InVybCgjYykiLz48cGF0aCBkPSJNMTIwIDIwMCBRMTEwIDIzMCAxMjUgMjUwIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iNSIgZmlsbD0ibm9uZSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  weishang: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzQ0NCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMjIwIiB5PSIxNTUiIHdpZHRoPSI1NSIgaGVpZ2h0PSI4NSIgcng9IjYiIGZpbGw9IiMyMjIiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjxjaXJjbGUgY3g9IjI0NyIgY3k9IjE2OCIgcj0iMTAiIGZpbGw9IiMzNDk4ZGIiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjwvc3ZnPg==",
+  hulianwang: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzU1NSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTM1IiB5PSIxNDAiIHdpZHRoPSIxMzAiIGhlaWdodD0iMTAwIiByeD0iNCIgZmlsbD0iIzJjM2U1MCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  jinrong: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTQ1IiB5PSIyODUiIHdpZHRoPSIxMTAiIGhlaWdodD0iMzUiIHJ4PSIzIiBmaWxsPSIjMWEyNjM0IiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  mingyuan: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZGNjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iI2M4YTA3MCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iOTUiIHI9IjU1IiBmaWxsPSIjYzhhMDcwIiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  jinghu: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzU1NSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iODUiIHk9IjI4NSIgd2lkdGg9IjIzMCIgaGVpZ2h0PSIzMCIgcng9IjQiIGZpbGw9IiNlZWUiIHN0cm9rZT0iI2NjYyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  nanyang: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZGNjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzY2NiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTEwIiByPSI0OCIgZmlsbD0iIzY2NiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjQwIiBjeT0iMTE1IiByPSI4IiBmaWxsPSIjZjVkY2MwIiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  tufang: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2U4YzBhMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjI1IiByPSIxMiIgZmlsbD0iI2ZmZDcwMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTEzMCAyODAgUTIwMCAzMTAgMjcwIDI4MCIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjgiIGZpbGw9Im5vbmUiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjwvc3ZnPg==",
+  wenyi: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzY2NiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjODg4IiBzdHJva2Utd2lkdGg9IjIiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjxjaXJjbGUgY3g9IjIzMiIgY3k9IjE4MCIgcj0iMTYiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzg4OCIgc3Ryb2tlLXdpZHRoPSIyIiBjbGlwLXBhdGg9InVybCgjYykiLz48cGF0aCBkPSJNMTYwIDEzMCBRMjAwIDE1MCAyNDAgMTMwIiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  baoma: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZGNjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iI2Q0YTA2MCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iOTUiIHI9IjU1IiBmaWxsPSIjZDRhMDYwIiBjbGlwLXBhdGg9InVybCgjYykiLz48L3N2Zz4=",
+  yangsheng: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzg4OCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTU1IiB5PSIxNTUiIHdpZHRoPSI5MCIgaGVpZ2h0PSI2MCIgcng9IjYiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2JiYiIgc3Ryb2tlLXdpZHRoPSIyIiBjbGlwLXBhdGg9InVybCgjYykiLz48bGluZSB4MT0iMTc1IiB5MT0iMTc4IiB4Mj0iMjI1IiB5Mj0iMTc4IiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iMiIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  yancao: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2U4YzBhMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzc3NyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGxpbmUgeDE9IjIxNSIgeTE9IjE2MCIgeDI9IjI4NSIgeTI9IjEzNSIgc3Ryb2tlPSIjYmJiIiBzdHJva2Utd2lkdGg9IjUiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjxlbGxpcHNlIGN4PSIyOTAiIGN5PSIxMzMiIHJ4PSIxMCIgcnk9IjYiIGZpbGw9IiNlNzRjM2MiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjwvc3ZnPg==",
+  kaogong: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Y1ZTBjMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHJlY3QgeD0iMTI1IiB5PSIxNTUiIHdpZHRoPSIzNSIgaGVpZ2h0PSI1MCIgcng9IjIiIGZpbGw9IiNmZmYiIHN0cm9rZT0iI2FhYSIgc3Ryb2tlLXdpZHRoPSIyIiBjbGlwLXBhdGg9InVybCgjYykiLz48cmVjdCB4PSIyNDAiIHk9IjE1NSIgd2lkdGg9IjM1IiBoZWlnaHQ9IjUwIiByeD0iMiIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSIjYWFhIiBzdHJva2Utd2lkdGg9IjIiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjwvc3ZnPg==",
+  bailan: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2YwZDViMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzg4OCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI0NSIgcng9IjM1IiByeT0iMjUiIGZpbGw9IiNkZGQiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjwvc3ZnPg==",
+  tuixiu: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2U4YzBhMCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iI2FhYSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iOTUiIHI9IjQ4IiBmaWxsPSIjYWFhIiBjbGlwLXBhdGg9InVybCgjYykiLz48cGF0aCBkPSJNMTMwIDI3NSBRMjAwIDMwNSAyNzAgMjc1IiBzdHJva2U9IiM4ODgiIHN0cm9rZS13aWR0aD0iNiIgZmlsbD0ibm9uZSIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+  jianshen: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIj48ZGVmcz48Y2xpcFBhdGggaWQ9ImMiPjxjaXJjbGUgY3g9IjIwMCIgY3k9IjIwMCIgcj0iMTk1Ii8+PC9jbGlwUGF0aD48L2RlZnM+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiNmOGY0ZjAiLz48Y2lyY2xlIGN4PSIyMDAiIGN5PSIyMDAiIHI9IjE5NSIgZmlsbD0iI2Q0YTA2MCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMTIwIiByPSI1MiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMTY4IiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGNpcmNsZSBjeD0iMjMyIiBjeT0iMTgwIiByPSIxMiIgZmlsbD0iIzMzMyIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PHBhdGggZD0iTTE2MCAyMzAgUTIwMCAyNjAgMjQwIDIzMCIgc3Ryb2tlPSIjYzg4IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PGVsbGlwc2UgY3g9IjIwMCIgY3k9IjI2MCIgcng9IjUwIiByeT0iMzUiIGZpbGw9IiNkNGEwNjAiIGNsaXAtcGF0aD0idXJsKCNjKSIvPjxlbGxpcHNlIGN4PSIxNDUiIGN5PSIyNDAiIHJ4PSIxNSIgcnk9IjMwIiBmaWxsPSIjZDRhMDYwIiBjbGlwLXBhdGg9InVybCgjYykiLz48ZWxsaXBzZSBjeD0iMjU1IiBjeT0iMjQwIiByeD0iMTUiIHJ5PSIzMCIgZmlsbD0iI2Q0YTA2MCIgY2xpcC1wYXRoPSJ1cmwoI2MpIi8+PC9zdmc+",
+};
+// ================================================================
+// 登味等级
+// ================================================================
+const levels = [
+  { id: 0, name: '毫无登味', min: 0, max: 12, desc: '你清新脱俗，犹如一股清流，在这个充满老登的世界里独善其身。建议好好保持，不要被腌入味了。' },
+  { id: 1, name: '小登', min: 13, max: 20, desc: '你已经初具登形，在某些方面开始展现老登天赋。就像一块正在腌制的五花肉，味道已经有了，但火候还差一点。' },
+  { id: 2, name: '中登', min: 21, max: 28, desc: '你的登味已经不可忽视。在日常行为中已经能看出明显的老登倾向，恭喜你，已经成功混入老登圈。' },
+  { id: 3, name: '老登', min: 29, max: 36, desc: '名副其实的老登，道行深厚。你已经在某个领域深耕多年，登味浓郁，后辈见到你都得叫声"老师好"。' },
+  { id: 4, name: '超级老登', min: 37, max: 44, desc: '登味扑鼻，资深老炮。你就是传说中的"登王"，在登界是响当当的人物，一开口就知道是老江湖了。' },
+  { id: 5, name: '羽化而登仙', min: 45, max: 999, desc: '登峰造极，超凡入圣。你已经超越了老登的范畴，达到了"登仙"的境界。建议原地出道，开班授课，书名就叫《登道》。' }
+];
+
+// ================================================================
+// 状态
+// ================================================================
+let currentQuestion = 0;
+let scores = { guoqi: 0, tizhi: 0, waiqi: 0, xiaodeng: 0, gaoguan: 0, xueshu: 0, shehui: 0, weishang: 0, hulianwang: 0, jinrong: 0, mingyuan: 0, jinghu: 0, nanyang: 0, tufang: 0, wenyi: 0, baoma: 0, yangsheng: 0, yancao: 0, kaogong: 0, bailan: 0, tuixiu: 0, jianshen: 0 };;
+let answered = [];
+
+// ================================================================
+// 初始化背景装饰
+// ================================================================
+function initBg() {
+  const emojis = ['🧓', '👴', '👨‍💼', '👔', '📋', '🏢', '📱', '📚', '💪', '☕', '🍵', '✈️', '🎓', '💼', '🔥'];
+  const container = document.getElementById('bgPattern');
+  for (let i = 0; i < 10; i++) {
+    const span = document.createElement('span');
+    span.textContent = emojis[i % emojis.length];
+    span.style.left = (Math.random() * 95) + '%';
+    span.style.animationDuration = (15 + Math.random() * 25) + 's';
+    span.style.animationDelay = (Math.random() * -20) + 's';
+    span.style.fontSize = (24 + Math.random() * 30) + 'px';
+    container.appendChild(span);
+  }
+}
+initBg();
+
+// ================================================================
+// 生成闪亮星星
+// ================================================================
+function createSparkles() {
+  const container = document.getElementById('sparkleContainer');
+  if (!container) return;
+  container.innerHTML = '';
+  const emojis = ['✦', '✧', '✨', '⭐', '💫'];
+  for (let i = 0; i < 8; i++) {
+    const el = document.createElement('span');
+    el.className = 'sparkle';
+    el.textContent = emojis[i % emojis.length];
+    el.style.left = Math.random() * 80 + 10 + '%';
+    el.style.top = Math.random() * 80 + 10 + '%';
+    el.style.animationDelay = Math.random() * 2 + 's';
+    el.style.animationDuration = (1.5 + Math.random() * 1.5) + 's';
+    container.appendChild(el);
+  }
+}
+
+// ================================================================
+// 工具
+// ================================================================
+function showToast(msg, duration) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration || 1500);
+}
+
+// ================================================================
+// 页面切换
+// ================================================================
+function showPage(id) {
+  ['page-home', 'page-quiz', 'page-result'].forEach(p => {
+    document.getElementById(p).style.display = p === id ? 'block' : 'none';
+  });
+  window.scrollTo(0, 0);
+}
+
+// ================================================================
+// 开始答题
+// ================================================================
+function startQuiz() {
+  currentQuestion = 0;
+  scores = { guoqi: 0, tizhi: 0, waiqi: 0, xiaodeng: 0, gaoguan: 0, xueshu: 0, shehui: 0, weishang: 0, hulianwang: 0, jinrong: 0, mingyuan: 0 };
+  answered = [];
+  showPage('page-quiz');
+  renderQuestion();
+}
+
+// ================================================================
+// 渲染题目
+// ================================================================
+function renderQuestion() {
+  const q = questions[currentQuestion];
+  document.getElementById('qNumber').textContent = `第 ${currentQuestion + 1} 题`;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('progressFill').style.width = ((currentQuestion) / questions.length * 100) + '%';
+  document.getElementById('progressText').textContent = `${currentQuestion + 1}/${questions.length}`;
+
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  const labels = 'ABCDEFGHIJ'.split('');
+
+  q.options.forEach((opt, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.innerHTML = `<span class="option-label">${labels[idx]}</span>${opt.text}`;
+    btn.onclick = () => selectOption(idx);
+    container.appendChild(btn);
+  });
+}
+
+// ================================================================
+// 选择选项
+// ================================================================
+function selectOption(idx) {
+  const q = questions[currentQuestion];
+  const opt = q.options[idx];
+  const btns = document.querySelectorAll('.option-btn');
+
+  // 禁用所有按钮
+  btns.forEach(b => b.disabled = true);
+  btns[idx].classList.add('selected');
+
+  // 累加分数
+  const typeKeys = Object.keys(opt.scores);
+  typeKeys.forEach(k => {
+    if (scores[k] !== undefined) {
+      scores[k] += opt.scores[k];
+    }
+  });
+
+  answered.push(idx);
+
+  // 下一题
+  setTimeout(() => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      renderQuestion();
+    } else {
+      showResult();
+    }
+  }, 400);
+}
+
+// ================================================================
+// 计算结果
+// ================================================================
+function calculateResult() {
+  // 找到最高分类型
+  let maxScore = 0;
+  let maxType = 'guoqi';
+  const typeKeys = Object.keys(scores);
+
+  typeKeys.forEach(k => {
+    if (scores[k] > maxScore) {
+      maxScore = scores[k];
+      maxType = k;
+    }
+  });
+
+  // 计算总分（含登量）
+  const totalScore = typeKeys.reduce((sum, k) => sum + scores[k], 0);
+
+  // 确定登味等级
+  let level = levels[0];
+  for (const l of levels) {
+    if (totalScore >= l.min && totalScore <= l.max) {
+      level = l;
+      break;
+    }
+  }
+  // 如果超出最高范围，给最高级
+  if (totalScore > levels[levels.length - 1].max) {
+    level = levels[levels.length - 1];
+  }
+
+  return { maxType, maxScore, totalScore, level, scores: { ...scores } };
+}
+
+// ================================================================
+// 显示结果
+// ================================================================
+function showResult() {
+  const result = calculateResult();
+  const typeInfo = types[result.maxType];
+  const levelInfo = result.level;
+  const typeKeys = Object.keys(types);
+
+  showPage('page-result');
+  createSparkles();
+
+  // 计算匹配度：最高分 / (最高分 + 第二高分)
+  const sortedScores = typeKeys.map(k => ({ type: k, score: result.scores[k] })).sort((a, b) => b.score - a.score);
+  const topScore = sortedScores[0].score;
+  const secondScore = sortedScores.length > 1 ? sortedScores[1].score : 0;
+  const matchPct = topScore > 0 ? Math.round(topScore / (topScore + secondScore + Math.max(0, 3 - (topScore - secondScore))) * 100) : 0;
+  const displayMatch = Math.min(Math.max(matchPct, 50), 99);
+
+    // Set avatar image
+  const avatarImg = document.getElementById('resultAvatarImg');
+  const avatarKey = result.maxType;
+  if (AVATAR_IMAGES[avatarKey]) {
+    avatarImg.src = AVATAR_IMAGES[avatarKey];
+    avatarImg.style.display = 'block';
+    document.getElementById('resultEmoji').style.display = 'none';
+  } else {
+    avatarImg.style.display = 'none';
+    document.getElementById('resultEmoji').style.display = 'block';
+      // Set avatar image
+  const avatarImg2 = document.getElementById('resultAvatarImg');
+  if (AVATAR_IMAGES[typeKey]) {
+    avatarImg2.src = AVATAR_IMAGES[typeKey];
+    avatarImg2.style.display = 'block';
+    document.getElementById('resultEmoji').style.display = 'none';
+  } else {
+    avatarImg2.style.display = 'none';
+    document.getElementById('resultEmoji').style.display = 'block';
+    document.getElementById('resultEmoji').textContent = typeInfo.emoji;
+  }
+  }
+  document.getElementById('resultTitle').textContent = typeInfo.name;
+  document.getElementById('resultTypeBadge').textContent = typeInfo.emoji + ' ' + typeInfo.name;
+  document.getElementById('matchBadge').textContent = '匹配度 ' + displayMatch + '%';
+  document.getElementById('resultLevel').textContent = '登味等级：' + levelInfo.name;
+
+  // 含登量分数
+  const total = Math.min(result.totalScore, 62);
+  document.getElementById('scoreValue').textContent = total + ' 分';
+  document.getElementById('scoreBar').style.width = (total / 62 * 100) + '%';
+
+  // 画像描述
+  document.getElementById('resultDesc').innerHTML = typeInfo.desc;
+
+  // 登味分析 + 等级描述
+  document.getElementById('resultAnalysis').innerHTML = `
+    <p style="margin-bottom:8px;">${typeInfo.analysis}</p>
+    <div style="margin-top:10px; padding:10px 14px; background:var(--soft); border-radius:12px;">
+      <strong>📊 登味评估：</strong> ${levelInfo.desc}
+    </div>
+    <div class="tag-cloud">
+      ${typeInfo.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+    </div>
+  `;
+
+  // 经典语录
+  document.getElementById('resultQuote').innerHTML = `
+    <div class="quote-box">
+      ${typeInfo.quote}
+    </div>
+  `;
+
+  // 相似类型推荐
+  if (typeInfo.similar && typeInfo.similar.length > 0) {
+    document.getElementById('similarSection').style.display = 'block';
+    const similarHtml = typeInfo.similar.map(k => {
+      const t = types[k];
+      return t ? `<a class="similar-chip" href="javascript:void(0)" onclick="showTypeDetail('${k}')">${t.emoji} ${t.name}</a>` : '';
+    }).join('');
+    document.getElementById('similarTypes').innerHTML = `
+      <p style="margin-bottom:8px; color:#6b5342; font-size:14px;">
+        如果你测出是「${typeInfo.name}」，可能也会对下面这些类型感同身受：
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">${similarHtml}</div>
+    `;
+  } else {
+    document.getElementById('similarSection').style.display = 'none';
+  }
+
+  // FAQ
+  if (typeInfo.faq) {
+    document.getElementById('faqSection').style.display = 'block';
+    document.getElementById('faqTypeName').textContent = typeInfo.name;
+    document.getElementById('resultFaq').innerHTML = `
+      <div style="background:var(--soft); border-radius:12px; padding:14px 16px; line-height:1.7;">
+        ${typeInfo.faq}
+      </div>
+    `;
+  } else {
+    document.getElementById('faqSection').style.display = 'none';
+  }
+
+  // 五维雷达图
+  drawPolarChart(typeInfo.radar || [50,50,50,50,50]);
+
+  // 详细得分
+  renderScoreBreakdown(result);
+}
+
+// ================================================================
+// 得分明细
+// ================================================================
+function renderScoreBreakdown(result) {
+  const container = document.getElementById('scoreBreakdown');
+  const typeKeys = Object.keys(types);
+  const maxScore = Math.max(...typeKeys.map(k => result.scores[k]), 1);
+
+  let html = '';
+  typeKeys.forEach(k => {
+    const t = types[k];
+    const score = result.scores[k];
+    const pct = (score / maxScore * 100);
+    const isMax = k === result.maxType;
+    html += `
+      <div style="display:flex; align-items:center; margin-bottom:8px; ${isMax ? 'font-weight:700;' : ''}">
+        <span style="width:80px; font-size:13px;">${t.emoji} ${t.name}</span>
+        <div style="flex:1; height:18px; background:#f0e6d8; border-radius:10px; margin:0 8px; overflow:hidden;">
+          <div style="height:100%; width:${pct}%; background:${isMax ? 'linear-gradient(90deg,#e67e22,#e74c3c)' : '#d4c8b8'}; border-radius:10px; transition:width 0.8s ease;"></div>
+        </div>
+        <span style="width:30px; text-align:right; font-size:13px; color:${isMax ? '#e67e22' : '#a0806a'};">${score}</span>
+      </div>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+// ================================================================
+// 分享功能
+// ================================================================
+function shareResult() {
+  const typeInfo = types[calculateResult().maxType];
+  const levelInfo = calculateResult().level;
+  const url = window.location.href;
+  const isFile = url.startsWith('file://');
+  const displayUrl = isFile ? 'https://你的域名.com/含登量测评' : url;
+  const shareText = `🧓 我刚刚测了「含登量测评」！\n我的老登画像：${typeInfo.emoji} ${typeInfo.name}\n登味等级：${levelInfo.name}\n\n快测测你的含登量：${displayUrl}`;
+
+  if (!isFile && navigator.share) {
+    navigator.share({
+      title: '含登量测评',
+      text: shareText,
+      url: url
+    }).catch(() => {});
+    return;
+  }
+
+  // Copy to clipboard
+  const ta = document.createElement('textarea');
+  ta.value = shareText;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('✅ 已复制！快去分享给朋友吧', 2000);
+  } catch(e) {
+    showToast('📤 截图发给朋友也行', 1500);
+  }
+  document.body.removeChild(ta);
+}
+
+// ================================================================
+// 生成海报（含二维码）
+// ================================================================
+function savePoster() {
+  const result = calculateResult();
+  const typeInfo = types[result.maxType];
+  const levelInfo = result.level;
+  const url = window.location.href;
+  const displayUrl = url.startsWith('file://') ? '请上线后扫码' : url;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = 540;
+  canvas.height = 780;
+  const ctx = canvas.getContext('2d');
+
+  // Draw poster content
+  function drawPoster(qrImgLoaded) {
+    // 背景
+    const grad = ctx.createLinearGradient(0, 0, 540, 780);
+    grad.addColorStop(0, '#fdf8ed');
+    grad.addColorStop(0.5, '#fcf3e0');
+    grad.addColorStop(1, '#f8ecd0');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 540, 780);
+
+    // 装饰圆
+    ctx.beginPath(); ctx.arc(480, -40, 180, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(230,126,34,0.06)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(-30, 700, 140, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(231,76,60,0.04)'; ctx.fill();
+
+    // 标题
+    ctx.fillStyle = '#3d2b1f';
+    ctx.font = 'bold 28px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('🧓 含登量测评', 270, 60);
+
+    ctx.strokeStyle = 'rgba(160,128,106,0.2)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(80, 78); ctx.lineTo(460, 78); ctx.stroke();
+
+    // 头像
+    const avatarUri = AVATAR_IMAGES && AVATAR_IMAGES[result.maxType];
+    if (avatarUri && qrImgLoaded) {
+      const aImg = new Image();
+      aImg.onload = function() {
+        ctx.save();
+        ctx.beginPath(); ctx.arc(270, 170, 50, 0, Math.PI*2); ctx.clip();
+        ctx.drawImage(aImg, 220, 120, 100, 100);
+        ctx.restore();
+      };
+      aImg.src = avatarUri;
+    }
+    ctx.font = '72px sans-serif';
+    ctx.fillText(typeInfo.emoji, 270, 178);
+
+    // 类型名称
+    ctx.fillStyle = '#3d2b1f';
+    ctx.font = 'bold 34px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillText(typeInfo.name, 270, 248);
+
+    // 等级
+    const lvlColors = ['#2ecc71','#f1c40f','#e67e22','#e74c3c','#9b59b6','#e74c3c'];
+    ctx.fillStyle = lvlColors[levelInfo.id] || '#e67e22';
+    ctx.font = 'bold 20px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillText('登味等级：' + levelInfo.name, 270, 288);
+
+    // 匹配度
+    const sorted = Object.keys(types).map(k=>({k,s:result.scores[k]})).sort((a,b)=>b.s-a.s);
+    const match = sorted[0].s > 0 ? Math.min(99,Math.max(50,Math.round(sorted[0].s/(sorted[0].s+sorted[1].s+Math.max(0,3-(sorted[0].s-sorted[1].s)))*100))) : 50;
+    ctx.fillStyle = '#a0806a';
+    ctx.font = '15px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillText('匹配度 ' + match + '%', 270, 320);
+
+    // 描述
+    ctx.fillStyle = '#6b5342';
+    ctx.font = '14px "PingFang SC","Microsoft YaHei",sans-serif';
+    const shortDesc = typeInfo.desc.length > 100 ? typeInfo.desc.substring(0,100) + '…' : typeInfo.desc;
+    ctx.fillText(shortDesc, 270, 365);
+
+    // 分割线
+    ctx.strokeStyle = 'rgba(160,128,106,0.15)';
+    ctx.beginPath(); ctx.moveTo(80, 400); ctx.lineTo(460, 400); ctx.stroke();
+
+    // 标签
+    ctx.textAlign = 'center';
+    ctx.font = '13px "PingFang SC","Microsoft YaHei",sans-serif';
+    (typeInfo.tags || []).slice(0,4).forEach((tag,i) => {
+      const x = 135 + i * 100;
+      ctx.fillStyle = '#f5ebe0';
+      roundRect(ctx, x-40, 428, 80, 26, 13); ctx.fill();
+      ctx.fillStyle = '#7a5f4a';
+      ctx.fillText('#' + tag, x, 447);
+    });
+
+    // === 二维码区域 ===
+    const qrY = 490;
+    ctx.fillStyle = '#fff';
+    roundRect(ctx, 195, qrY, 150, 150, 10); ctx.fill();
+    ctx.strokeStyle = 'rgba(230,126,34,0.2)';
+    ctx.lineWidth = 2;
+    roundRect(ctx, 195, qrY, 150, 150, 10); ctx.stroke();
+
+    if (qrImgLoaded && qrImgLoaded.complete && qrImgLoaded.naturalWidth > 0) {
+      ctx.drawImage(qrImgLoaded, 200, qrY + 5, 140, 140);
+    } else {
+      // Draw decorative QR pattern
+      const qrSize = 130;
+      const qx = 270 - qrSize/2, qy = qrY + 10;
+      // Draw QR-like pattern
+      const moduleSize = qrSize / 25;
+      const pattern = [
+        '1111111011111001111111',
+        '1000001010001000000101',
+        '1011101011101011101101',
+        '1011101011101011101101',
+        '1011101000101011101101',
+        '1000001010101000000101',
+        '1111111010101011111101',
+        '0000000011101000000010',
+        '1110111011101011101110',
+        '1000100010001000100010',
+        '1110101011101110101110',
+        '0000101000100010100000',
+        '1110111011101110111011',
+        '1000000010000000000001',
+        '1011101011101110111011',
+        '1011101000001000101010',
+        '1011101011101110101110',
+        '1000001000001000101010',
+        '1111111010101110111010',
+      ];
+      for (let r = 0; r < pattern.length; r++) {
+        for (let c = 0; c < pattern[r].length; c++) {
+          if (pattern[r][c] === '1') {
+            ctx.fillStyle = '#3d2b1f';
+            ctx.fillRect(qx + c * moduleSize, qy + r * moduleSize, moduleSize, moduleSize);
+          }
+        }
+      }
+      // Center mark
+      ctx.fillStyle = '#e67e22';
+      ctx.font = 'bold 11px sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('扫码', 270, qy + qrSize/2 - 8);
+      ctx.fillText('测评', 270, qy + qrSize/2 + 8);
+    }
+
+    // 底部说明
+    ctx.fillStyle = '#c8b8a8';
+    ctx.font = '13px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText('测测你的含登量', 270, qrY + 170);
+    const shortUrl = displayUrl.length > 45 ? displayUrl.substring(0, 42) + '…' : displayUrl;
+    ctx.font = '10px "PingFang SC","Microsoft YaHei",sans-serif';
+    ctx.fillText(shortUrl, 270, qrY + 190);
+
+    // 下载
+    const link = document.createElement('a');
+    link.download = '含登量_' + typeInfo.name + '_' + levelInfo.name + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('✅ 海报已保存！快去发朋友圈吧', 2000);
+  }
+
+  // Try to load QR code from API
+  const qrImg = new Image();
+  qrImg.crossOrigin = 'anonymous';
+  qrImg.onload = function() {
+    qrImg.complete = true;
+    qrImg.naturalWidth = this.naturalWidth || 150;
+    drawPoster(qrImg);
+  };
+  qrImg.onerror = function() { drawPoster(null); };
+  // Use Google Charts API for QR (requires internet)
+  if (!url.startsWith('file://')) {
+    qrImg.src = 'https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=' + encodeURIComponent(url);
+  } else {
+    drawPoster(null);
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// ================================================================
+// 复制挑战链接
+// ================================================================
+function copyChallengeLink() {
+  const link = window.location.href;
+  const textarea = document.createElement('textarea');
+  textarea.value = '🧓 来测测你的含登量！看看你是哪种"登"？\n🔗 ' + link;
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    showToast('✅ 挑战链接已复制！快去发给朋友', 2000);
+  } catch (e) {
+    showToast('📤 链接：' + link, 3000);
+  }
+  document.body.removeChild(textarea);
+}
+
+// ================================================================
+// 登味五维扇形图绘制
+// ================================================================
+function drawPolarChart(scores) {
+  const canvas = document.getElementById('polarChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2 + 4;
+  const r = 100;
+  const dims = ['官僚气', '油腻感', '摆烂度', '虚荣心', '压迫力'];
+  const colors = ['#e74c3c', '#f39c12', '#2ecc71', '#3498db', '#9b59b6'];
+  const count = dims.length;
+
+  ctx.clearRect(0, 0, W, H);
+
+  // Background guide circles
+  for (let ring = 1; ring <= 4; ring++) {
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * ring / 4, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(160,128,106,0.1)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  const maxScore = 100;
+  const totalAngle = Math.PI * 2;
+  const wedgeAngle = totalAngle / count;
+  const gapAngle = wedgeAngle * 0.04; // small gap between wedges
+
+  // Draw each wedge
+  for (let i = 0; i < count; i++) {
+    const val = Math.min(Math.max(scores[i] || 0, 0), maxScore);
+    const wedgeR = (val / maxScore) * r;
+    const startAngle = i * wedgeAngle + gapAngle - Math.PI/2;
+    const endAngle = (i + 1) * wedgeAngle - gapAngle - Math.PI/2;
+
+    // Draw the wedge with gradient
+    const color = colors[i];
+    const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, wedgeR);
+    grad.addColorStop(0, color + '80');
+    grad.addColorStop(0.6, color + '50');
+    grad.addColorStop(1, color + '20');
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, wedgeR, startAngle, endAngle);
+    ctx.closePath();
+    ctx.fillStyle = grad;
+    ctx.fill();
+    ctx.strokeStyle = color + '60';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Draw the outer arc highlight
+    ctx.beginPath();
+    ctx.arc(cx, cy, wedgeR, startAngle, endAngle);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw label
+    const labelAngle = i * wedgeAngle + wedgeAngle/2 - Math.PI/2;
+    const labelR = r + 28;
+    const lx = cx + labelR * Math.cos(labelAngle);
+    const ly = cy + labelR * Math.sin(labelAngle);
+    ctx.fillStyle = '#4a3a2a';
+    ctx.font = 'bold 12px "PingFang SC", sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(dims[i], lx, ly);
+
+    // Draw score label
+    const scoreR = Math.max(wedgeR * 0.6, 20);
+    const sx = cx + scoreR * Math.cos(labelAngle);
+    const sy = cy + scoreR * Math.sin(labelAngle);
+    if (val > 10) {
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 13px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(Math.round(val), sx, sy);
+    }
+  }
+
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx, cy, 16, 0, Math.PI * 2);
+  ctx.fillStyle = 'rgba(255,255,255,0.7)';
+  ctx.fill();
+  ctx.strokeStyle = 'rgba(160,128,106,0.3)';
+  ctx.lineWidth = 1;
+  ctx.stroke();
+
+  // Center text
+  const avg = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+  ctx.fillStyle = '#7a5f4a';
+  ctx.font = 'bold 14px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(avg, cx, cy);
+}
+
+// ================================================================
+// 显示指定类型的详情（从相似推荐点击）
+// ================================================================
+function showTypeDetail(typeKey) {
+  const typeInfo = types[typeKey];
+  if (!typeInfo) return;
+
+  // Build fake result with this type and the current scores
+  const result = calculateResult();
+  const fakeResult = {
+    maxType: typeKey,
+    maxScore: result.scores[typeKey] || 0,
+    totalScore: result.totalScore,
+    level: result.level,
+    scores: result.scores
+  };
+
+  // Update display
+  // Set avatar image for the clicked type
+  const avatarImg = document.getElementById('resultAvatarImg');
+  if (AVATAR_IMAGES[typeKey]) {
+    avatarImg.src = AVATAR_IMAGES[typeKey];
+    avatarImg.style.display = 'block';
+    document.getElementById('resultEmoji').style.display = 'none';
+  } else {
+    avatarImg.style.display = 'none';
+    document.getElementById('resultEmoji').style.display = 'block';
+    document.getElementById('resultEmoji').textContent = typeInfo.emoji;
+  }
+  document.getElementById('resultTitle').textContent = typeInfo.name;
+  document.getElementById('resultTypeBadge').textContent = typeInfo.emoji + ' ' + typeInfo.name;
+  document.getElementById('resultDesc').innerHTML = typeInfo.desc;
+
+  // Render similar + faq for this type
+  if (typeInfo.similar && typeInfo.similar.length > 0) {
+    const similarHtml = typeInfo.similar.map(k => {
+      const t = types[k];
+      return t ? `<a class="similar-chip" href="javascript:void(0)" onclick="showTypeDetail('${k}')">${t.emoji} ${t.name}</a>` : '';
+    }).join('');
+    document.getElementById('similarTypes').innerHTML = `
+      <p style="margin-bottom:8px; color:#6b5342; font-size:14px;">
+        如果你测出是「${typeInfo.name}」，可能也会对下面这些类型感同身受：
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">${similarHtml}</div>
+    `;
+  }
+  drawPolarChart(typeInfo.radar || [50,50,50,50,50]);
+
+  if (typeInfo.faq) {
+    document.getElementById('faqTypeName').textContent = typeInfo.name;
+    document.getElementById('resultFaq').innerHTML = `
+      <div style="background:var(--soft); border-radius:12px; padding:14px 16px; line-height:1.7;">
+        ${typeInfo.faq}
+      </div>
+    `;
+  }
+
+  window.scrollTo(0, 0);
+  showToast('👀 查看：' + typeInfo.name, 1200);
+}
+
+// ================================================================
+// 重新开始
+// ================================================================
+function restartQuiz() {
+  if (confirm('确定要重新测一次吗？')) {
+    startQuiz();
+  }
+}
+
+// ================================================================
+// 初始化：URL参数恢复
+// ================================================================
+// 如果将来需要支持分享链接直接显示结果，可以在这里扩展
+
+console.log('🧓 含登量测评 v1.0 加载完成！');
+console.log('🔥 测测你是哪种"登"？');
+
+
+</script>
+
+</body>
+</html>
