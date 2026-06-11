@@ -4,19 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>含登量测评 | 测测你的老登指数</title>
-<meta name="description" content="含登量测评，22种老登画像+6级登味等级，测测你的老登指数！风趣幽默的社交测评。">
+<meta name="description" content="含登量测评，测测你的老登画像和登味等级！风趣幽默的社交测评，看看你是哪种类型的"登"。">
 <meta property="og:title" content="含登量测评 | 测测你的老登指数">
-<meta property="og:description" content="22种老登画像+6级登味等级，测测你的含登量！到底是国企登、外企登、还是互联网白兔登？答完便知。">
-<meta property="og:image" content="https://joezhou2014.github.io/deng-test/share-card.png">
-<meta property="og:image:width" content="600">
-<meta property="og:image:height" content="314">
+<meta property="og:description" content="趣味测评你的含登量，22种老登画像+6级登味等级，看看你到底是哪种"登"！">
+<meta property="og:image" content="">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://joezhou2014.github.io/deng-test/">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="含登量测评 | 测测你的老登指数">
-<meta name="twitter:description" content="22种老登画像，测测你的含登量！">
-<meta name="twitter:image" content="https://joezhou2014.github.io/deng-test/share-card.png">
-<link rel="canonical" href="https://joezhou2014.github.io/deng-test/">
 <style>
   :root {
     --bg: #fdf8ed;
@@ -1691,7 +1683,7 @@ function shareResult() {
   const levelInfo = calculateResult().level;
   const url = window.location.href;
   const isFile = url.startsWith('file://');
-  const displayUrl = isFile ? 'https://你的域名.com/含登量测评' : url;
+  const displayUrl = isFile ? 'https://joezhou2014.github.io/deng-test/' : url;
   const shareText = `🧓 我刚刚测了「含登量测评」！\n我的老登画像：${typeInfo.emoji} ${typeInfo.name}\n登味等级：${levelInfo.name}\n\n快测测你的含登量：${displayUrl}`;
 
   if (!isFile && navigator.share) {
@@ -1727,7 +1719,7 @@ function savePoster() {
   const typeInfo = types[result.maxType];
   const levelInfo = result.level;
   const url = window.location.href;
-  const displayUrl = url.startsWith('file://') ? '请上线后扫码' : url;
+  const displayUrl = url.startsWith('file://') ? 'https://joezhou2014.github.io/deng-test/' : url;
 
   const canvas = document.createElement('canvas');
   canvas.width = 540;
